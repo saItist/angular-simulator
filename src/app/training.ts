@@ -6,7 +6,7 @@ interface IUser {
   age: number;
   avatarUrl?: string;
 }
-interface IAdminUser extends IUser {
+interface IAdmin extends IUser {
   role: 'admin';
   permissions: string[];
   lastLoginAt?: Date;
@@ -51,17 +51,17 @@ export function formatText(text: string, format: TextFormat): string {
   switch (format) {
     case 'uppercase':
       return text.toUpperCase();
-
     case 'lowercase':
       return text.toLowerCase();
-
     case 'capitalize':
       return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-
     default:
       return text;
   }
 }
+//фильтрация пользователей старше 18 лет
+const adultUsers: IUser[] = users.filter(user => user.age >= 18);
+
 export function removeChar(text: string, char: string): string {
-  return text.split(char).join('');
+  return text.replaceAll(char, '');
 }
