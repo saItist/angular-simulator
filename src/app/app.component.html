@@ -7,14 +7,14 @@
         </div>
         <nav class="flex items-center justify-end w-[830px] h-[44px]">
             <div class="flex items-center gap-[24px] text-white w-[625px] h-[25px]">
-                <a href="#" class="nav-link">Главная</a>
-                <a href="#" class="nav-link">Про гида</a>
-                <a href="#" class="nav-link">Программа тура</a>
-                <a href="#" class="nav-link">Стоимость</a>
-                <a href="#" class="nav-link">Блог</a>
-                <a href="#" class="nav-link">Контакты</a>
+                <a href="#" id="nav-home-link" class="nav-link">Главная</a>
+                <a href="#" id="nav-guide-link" class="nav-link">Про гида</a>
+                <a href="#" id="nav-tour-program-link" class="nav-link">Программа тура</a>
+                <a href="#" id="nav-pricing-link" class="nav-link">Стоимость</a>
+                <a href="#" id="nav-blog-link" class="nav-link">Блог</a>
+                <a href="#" id="nav-contacts-link" class="nav-link">Контакты</a>
             </div>
-            <a href="#" class="flex items-center justify-center rounded bg-[#1A3E3E] text-white font-semibold text-lg transition-colors w-[180px] h-[44px]">
+            <a href="#" id="-consultation-button" class="flex items-center justify-center rounded bg-[#1A3E3E] text-white font-semibold text-lg transition-colors w-[180px] h-[44px]">
             Консультация
             </a>
          </nav>
@@ -31,7 +31,7 @@
         <div class="flex items-center w-[1095px] h-[81px] px-6 gap-6 relative">
                 <!-- 1. Локация для тура -->
                 <div class="flex flex-col items-start">
-                    <button type="button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
+                    <button type="button" id="location-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
                         <!-- Контейнер для текста -->
                         <div class="w-[210px] h-[24px] flex items-center text-lg font-['Nunito_Sans'] font-normal">Локация для тура</div>        
                         <img src="/assets/images/arrow-icon.svg" alt="arrow"/>
@@ -40,7 +40,7 @@
                 </div>
                 <!-- 2. Дата похода -->
                 <div class="flex flex-col items-start">
-                    <button type="button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
+                    <button type="button" id="date-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
                         <div class="w-[210px] h-[24px] flex items-center text-lg font-['Nunito_Sans'] font-normal">Дата похода</div>
                         <img src="/assets/images/calendar-icon.svg" alt="calendar"/>
                     </button>
@@ -48,17 +48,16 @@
                 </div>
                 <!-- 3. Кол-во участников -->
                 <div class="flex flex-col items-start">
-                    <button type="button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
+                    <button type="button" id="participants-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:border-white transition-colors">
                         <div class="w-[210px] h-[24px] flex items-center text-lg font-['Nunito_Sans'] font-normal">Участники</div>
                         <img src="/assets/images/arrow-icon.svg" alt="arrow"/>
                     </button>
                     <div class="absolute left-[635px] bottom-[-10px] text-sm font-['Nunito_Sans'] font-normal text-white">укажите кол-во участников</div>
                 </div>
                 <!-- 4. Кнопка поиска -->
-                    <button type="button" class="w-[213px] h-[52px] px-[37px] flex items-center justify-center rounded-md bg-white  font-semibold text-lg transition-colors">
-                        <div class="w-[210px] h-[24px] flex items-center text-base font-['Nunito_Sans'] font-bold text-[#1A3E3E]">Найти программу</div>
-                    </button>
-                   
+                <button type="button" id="search-button" class="w-[213px] h-[52px] px-[37px] flex items-center justify-center rounded-md bg-white  font-semibold text-lg transition-colors">
+                    <div class="w-[210px] h-[24px] flex items-center text-base font-['Nunito_Sans'] font-bold text-[#1A3E3E]">Найти программу</div>
+                </button>                   
         </div>           
     </div>
 </header>
