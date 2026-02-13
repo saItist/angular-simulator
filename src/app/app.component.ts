@@ -18,9 +18,8 @@ export class AppComponent implements OnInit {
 
   // Сохраняем дату последнего захода
   saveLastVisitDate(): void {
-    const currentDate = new Date();
-    const dateString = currentDate.toISOString();
-    localStorage.setItem('lastVisitDate', dateString);
+    const formattedDate = new Date().toLocaleString();
+    localStorage.setItem('lastVisitDate', formattedDate);
   }
 
   getLastVisitDate(): string | null {
