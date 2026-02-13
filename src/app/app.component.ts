@@ -16,67 +16,65 @@ export class AppComponent implements OnInit {
     this.incrementVisitCount();
   }
 
-  // Пункт 3 — дата последнего захода
+  // Сохраняем дату последнего захода
   saveLastVisitDate(): void {
-    const currentDate = new Date().toISOString();
-    localStorage.setItem('lastVisitDate', currentDate);
+    const currentDate = new Date();
+    const dateString = currentDate.toISOString();
+    localStorage.setItem('lastVisitDate', dateString);
   }
 
   getLastVisitDate(): string | null {
     return localStorage.getItem('lastVisitDate');
   }
 
-  // Пункт 4 — счётчик посещений
+  //Счётчик заходов
   incrementVisitCount(): void {
-    let count = Number(localStorage.getItem('visitCount')) || 0;
+    let count = 0;
+    const previousCount = localStorage.getItem('visitCount');
+    if (previousCount !== null) {
+      count = Number(previousCount);
+    }
     count += 1;
     localStorage.setItem('visitCount', count.toString());
   }
 
   getVisitCount(): number {
-    return Number(localStorage.getItem('visitCount')) || 0;
+    const storedValue = localStorage.getItem('visitCount');
+    if (storedValue !== null) {
+      return Number(storedValue);
+    }
+    return 0;
+  }
+  // Проверка цвета
+  isPrimaryColor(color: string): boolean {
+    if (color === Color.Red || color === Color.Green || color === Color.Blue) {
+      return true;
+    }
+    return false;
   }
 
-  // Пункт 2 — проверка основного цвета
-  isPrimaryColor(color: string): boolean {
-  return Object.values(Color).includes(color as any);
-}
-
-  // Тест коллекции городов Дагестана (теперь внутри метода)
   ngOnInit(): void {
-    console.log('Количество заходов:', this.getVisitCount());
-    console.log('Последний заход:', this.getLastVisitDate());
+    console.log('Visit count:', this.getVisitCount());
+    console.log('Last visit:', this.getLastVisitDate());
 
-    // Демонстрация коллекции городов Дагестана
-    const dagestanCities = new Collection<string>([
-      'Махачкала',
-      'Дербент',
-      'Каспийск',
-      'Хасавюрт',
-      'Кизляр',
-      'Избербаш',
-      'Кизилюрт',
-      'Буйнакск',
-      'Дагестанские Огни',
-      'Южно-Сухокумск'
-    ]);
+    // Тест коллекции — города Дагестана
+    console.log('--- Collection test ---');
 
-    console.log('Все города Дагестана:', dagestanCities.getAll());
+    const cities = new Collection<string>();
+    cities.add('Махачкала');
+    cities.add('Дербент');
+    console.log('Added 2 cities:', cities.getAll());
 
-    console.log('Город под индексом 1:', dagestanCities.getByIndex(1));
-    console.log('Город под индексом 7:', dagestanCities.getByIndex(7));
+    cities.add('Каспийск');
+    console.log('Added one more:', cities.getAll());
 
-    dagestanCities.replaceAtIndex(2, 'Сергокала');
-    console.log('После замены:', dagestanCities.getAll());
+    cities.replaceAtIndex(0, 'Кизляр');
+    console.log('Replaced first:', cities.getAll());
 
-    dagestanCities.removeByIndex(5);
-    console.log('После удаления:', dagestanCities.getAll());
+    cities.removeByIndex(1);
+    console.log('Removed second:', cities.getAll());
 
-    dagestanCities.clear();
-    console.log('После очистки, размер коллекции:', dagestanCities.size);
-
-    dagestanCities.add('Гуниб');
-    dagestanCities.add('Хив');
-    console.log('Новые города после добавления:', dagestanCities.getAll());
+    cities.clear();
+    console.log('Cleared:', cities.getAll());
   }
 }
