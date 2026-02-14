@@ -8,7 +8,7 @@ import { Collection } from '../collection';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   companyName: string = 'Р У М Т И Б Е Т';
 
   constructor() {
@@ -44,12 +44,9 @@ export class AppComponent implements OnInit {
     }
     return 0;
   }
-  // Проверка цвета
   isPrimaryColor(color: string): boolean {
-    if (color === Color.Red || color === Color.Green || color === Color.Blue) {
-      return true;
-    }
-    return false;
+  const upperColor = color.toUpperCase();
+  return upperColor === 'RED' || upperColor === 'GREEN' || upperColor === 'BLUE';
   }
 
   ngOnInit(): void {
@@ -59,21 +56,14 @@ export class AppComponent implements OnInit {
     // Тест коллекции — города Дагестана
     console.log('--- Collection test ---');
 
-    const cities = new Collection<string>();
-    cities.add('Махачкала');
-    cities.add('Дербент');
-    console.log('Added 2 cities:', cities.getAll());
+    const numbers = new Collection<number>([1, 2, 3]);
+    const names = new Collection<string>(["Abdurahman", "Omar", "AliAskhab"]);
+    console.log(numbers.getAll());
+    numbers.remove(1);
+    console.log(numbers.getAll());
+    console.log(names.get(0));
+    names.replace(1, "Ahmed");
+    console.log(names.getAll());
 
-    cities.add('Каспийск');
-    console.log('Added one more:', cities.getAll());
-
-    cities.replaceAtIndex(0, 'Кизляр');
-    console.log('Replaced first:', cities.getAll());
-
-    cities.removeByIndex(1);
-    console.log('Removed second:', cities.getAll());
-
-    cities.clear();
-    console.log('Cleared:', cities.getAll());
   }
 }
