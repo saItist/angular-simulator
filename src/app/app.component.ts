@@ -9,7 +9,8 @@ import { Collection } from '../collection';
   styleUrl: './app.component.scss',
 })
 
-export class AppComponent { 
+export class AppComponent {
+
   companyName: string = 'Румтибет';
 
   constructor() {
@@ -18,17 +19,19 @@ export class AppComponent {
   }
 
   saveLastVisitDate(): void {
-    const formattedDate = new Date().toLocaleString();
-    localStorage.setItem('lastVisitDate', formattedDate);
+    const formattedDate: string = new Date().toLocaleString();
+    localStorage.setItem('last-visit-date', formattedDate);
   }
 
   incrementVisitCount(): void {
-    let count = Number(localStorage.getItem('visitCount')) || 0;
+    let count: number = Number(localStorage.getItem('visit-count')) || 0;
     count += 1;
-    localStorage.setItem('visitCount', count.toString());
+    localStorage.setItem('visit-count', count.toString());
   }
 
   isPrimaryColor(color: Color): boolean {
-    return Object.values(Color).includes(color);
+    return  color === Color.RED || 
+            color === Color.GREEN ||
+            color === Color.BLUE;
   }
 }
