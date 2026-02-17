@@ -30,8 +30,7 @@ export class AppComponent {
   }
 
   isPrimaryColor(color: Color): boolean {
-    return  color === Color.RED || 
-            color === Color.GREEN ||
-            color === Color.BLUE;
+    const primaryColors = [Color.RED, Color.GREEN, Color.BLUE];
+    return primaryColors.includes(color);
   }
 }
