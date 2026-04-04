@@ -1,17 +1,17 @@
-<div *ngIf="isLoading" class="loading-screen">
+@if (isLoading) {
+<div class="loading-screen">
   <div class="spinner"></div>
 </div>
-
-<div *ngIf="!isLoading">
-<header class="relative w-full bg-[url('/images/mountains-bg.jpg')] bg-cover bg-center h-[985px]">
-    <div class="absolute inset-x-0 top-0 h-[120px] bg-[#18121E80] backdrop-blur-sm z-10"></div>
-    <div class="mx-auto pt-6 flex h-[72px] w-[1180px] items-center justify-between z-20 relative">
-        <div class="mx-auto pt-6 w-[1180px] flex flex-col items-center mr-24">
-            <img src="/images/logo-mountain-icon.svg" alt="Logo" class="w-[130px] h-[72px]"/>
-            <h1 class="text-white mt-0 text-xl font-['Nunito_Sans'] tracking-[0.6rem] uppercase">{{ companyName }}</h1>
+} @else {
+<header class="header-bg">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+        <div class="logo-section">
+            <img src="/images/logo-mountain-icon.svg" alt="Logo" class="logo-img"/>
+            <h1 class="logo-text">{{ companyName }}</h1>
         </div>
-        <nav class="flex items-center justify-end w-[830px] h-[44px]">
-            <div class="flex items-center gap-[24px] text-white w-[625px] h-[25px] cursor-pointer">
+        <nav class="nav">
+            <div class="nav-links">
                 <a href="#" id="nav-home-link" class="nav-link">Главная</a>
                 <a href="#" id="nav-guide-link" class="nav-link">Про гида</a>
                 <a href="#" id="nav-tour-program-link" class="nav-link">Программа тура</a>
@@ -19,99 +19,97 @@
                 <a href="#" id="nav-blog-link" class="nav-link">Блог</a>
                 <a href="#" id="nav-contacts-link" class="nav-link">Контакты</a>
             </div>
-            <div class="flex flex-col items-end gap-2">
-                <button id="consultation-button" class="flex items-center justify-center rounded bg-white text-[#1A3E3E] font-semibold text-lg transition-all duration-300 ease-in-out w-[180px] h-[44px] hover:bg-[#1A3E3E] hover:text-white hover:border-2 hover:border-white hover:scale-105 hover:shadow-md cursor-pointer">Консультация</button>
-                <button type="button" (click)="toggleMode()" class="px-4 py-1 rounded bg-white text-[#1A3E3E] font-semibold hover:bg-[#f0f0f0]">{{ currentMode === 'date' ? 'Показать кликер' : 'Показать дату' }}</button>
-                <div class="text-white text-right">
-                    <ng-container *ngIf="currentMode === 'date'">
-                        <span class="text-sm">Текущее время: {{ currentTime }}</span>
-                    </ng-container>
-                    <ng-container *ngIf="currentMode === 'clicker'">
-                        <div class="flex items-center gap-2 justify-end">
-                            <button type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0" class="px-3 py-1 rounded bg-white text-[#1A3E3E] disabled:opacity-50 disabled:cursor-not-allowed">-</button>
-                            <span class="text-sm">{{ clickCounter }}</span>
-                            <button type="button" (click)="incrementClickCounter()" class="px-3 py-1 rounded bg-white text-[#1A3E3E]">+</button>
+            <div class="nav-buttons">
+                <button id="consultation-button" class="consultation-btn">Консультация</button>
+                <button type="button" (click)="toggleMode(currentMode === 'date' ? 'clicker' : 'date')" class="mode-btn">{{ currentMode === 'date' ? 'Показать кликер' : 'Показать дату' }}</button>
+                <div class="time-display">
+                    @if (currentMode === 'date') {
+                        <span class="time-text">Текущее время: {{ currentTime }}</span>
+                    } @else {
+                        <div class="clicker-controls">
+                            <button type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0" class="clicker-btn">-</button>
+                            <span class="clicker-count">{{ clickCounter }}</span>
+                            <button type="button" (click)="incrementClickCounter()" class="clicker-btn">+</button>
                         </div>
-                    </ng-container>
+                    }
                 </div>
             </div>
          </nav>
 
     </div>
-    <div class="absolute left-1/2 top-[550px] -translate-x-1/2 w-[1080px] h-[150px] text-center">
-        <h1 class="font-normal text-left leading-1.3 text-[50px] uppercase leading-tight tracking-wide text-white">
+    <div class="hero-title">
+        <h1 class="hero-title-text">
             Насладись прогулкой в горах<br>с командой единомышленников
         </h1>
     </div>
-    <div id="search-form" class="absolute left-[calc(50%+45px)] top-[calc(550px+150px+51px)] -translate-x-1/2 w-[1180px] h-[161px] bg-white/40 rounded-xl flex items-center justify-center flex-nowrap gap-6">
-        <div class="flex items-center w-[1115px] h-[81px] pl-5 gap-[24px] relative">
-            <div class="flex flex-col items-start">
-                <select [(ngModel)]="location" id="location-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:bg-white/65 hover:text-[#1A3E3E] hover:border-[#1A3E3E] duration-300 ease-in-out transition-all cursor-pointer">
+    <div id="search-form" class="search-form">
+        <div class="search-inputs">
+            <div class="input-group">
+                <select [(ngModel)]="location" id="location-button" class="select-input">
                     <option value="">Локация для тура</option>
                     <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
                 </select>
-                <div class="absolute left-[40px] bottom-[-10px] text-sm font-['Nunito_Sans'] font-normal text-white">выберите из списка</div>
+                <div class="input-label">выберите из списка</div>
             </div>
-            <div class="flex flex-col items-start">
-                <input type="date" [(ngModel)]="date" id="date-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:bg-white/65 hover:text-[#1A3E3E] hover:border-[#1A3E3E] duration-300 ease-in-out transition-all cursor-pointer">
-                <div class="absolute left-[320px] bottom-[-10px] text-sm font-['Nunito_Sans'] font-normal text-white">укажите дату</div>
+            <div class="input-group">
+                <input type="date" [(ngModel)]="date" id="date-button" class="select-input">
+                <div class="input-label">укажите дату</div>
             </div>
-            <div class="flex flex-col items-start">
-                <select [(ngModel)]="participants" id="participants-button" class="w-[270px] h-[52px] px-5 flex items-center justify-between border border-white rounded-lg bg-transparent text-white hover:bg-white/65 hover:text-[#1A3E3E] hover:border-[#1A3E3E] duration-300 ease-in-out transition-all cursor-pointer">
+            <div class="input-group">
+                <select [(ngModel)]="participants" id="participants-button" class="select-input">
                     <option value="">Выберите количество участников</option>
                     <option *ngFor="let option of participantOptions" [value]="option">{{ option }}</option>
                 </select>
-                <div class="absolute left-[615px] bottom-[-10px] text-sm font-['Nunito_Sans'] font-normal text-white">укажите кол-во участников</div>
-            </div>                
-            <button type="button" id="search-button" [disabled]="!isFormValid()" class="w-[213px] h-[52px] flex items-center px-[25px] justify-center rounded-md bg-[#1A3E3E] text-white font-['Nunito_Sans'] font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer hover:bg-white hover:text-[#1A3E3E] hover:border hover:border-white disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-gray-600 disabled:hover:border-none">Найти программу</button>
-        </div>           
+                <div class="input-label">укажите кол-во участников</div>
+            </div>
+            <button type="button" id="search-button" [disabled]="!isFormValid()" class="search-btn">Найти программу</button>
+        </div>
     </div>
-    <div class="absolute left-1/2 top-[calc(550px+150px+51px+161px+20px)] -translate-x-1/2 w-[600px] h-[50px] flex items-center gap-4">
-        <input [(ngModel)]="liveText" type="text" placeholder="Введите текст" class="w-[300px] h-[40px] px-3 border border-white rounded-lg bg-transparent text-white placeholder-white/70 hover:bg-white/65 hover:text-[#1A3E3E] hover:border-[#1A3E3E] duration-300 ease-in-out">
-        <span class="text-white text-lg">{{ liveText }}</span>
+    <div class="live-text-section">
+        <input [(ngModel)]="liveText" type="text" placeholder="Введите текст" class="live-input">
+        <span class="live-display">{{ liveText }}</span>
     </div>
 </header>
-<section id = "mountain-explore-section" class="w-full bg-white h-[771px] pt-[80px] px-[220px]">
-    <div id="explore-mountains-container" class="h-[562px] max-w-[1180px] min-w-[1180px] flex items-center">
-        <div id="hero-images-container" class="w-[562px] h-[526px] ml-[-70px]">
-            <img src="/images/mountain-peak.jpg" alt="Mountain Peak" class="w-[350px] h-[400px] z-30">
-            <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="w-[350px] h-[400px] ml-[130px] mt-[-270px] z-10 rounded-3xl">
+<section id="mountain-explore-section" class="explore-section">
+    <div id="explore-mountains-container" class="explore-container">
+        <div id="hero-images-container" class="hero-images">
+            <img src="/images/mountain-peak.jpg" alt="Mountain Peak" class="mountain-peak">
+            <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="mountain-cabin">
         </div>
-        <div id="play-button-container" class="cursor-pointer  bg-white/50 rounded-full ml-[220px] mt-[135px] absolute p-3">
-            <img src="/images/play-icon.svg" alt="Play Icon" class="w-[14px] h-[15px] z-40">
+        <div id="play-button-container" class="play-button">
+            <img src="/images/play-icon.svg" alt="Play Icon" class="play-icon">
         </div>
-        <div id="tour-program-description" class="min-w-[580px] max-w-[580px] flex flex-col justify-start items-start ml-[40px] mt-[10px]">
-            <h3 class="text-[#F2BE22] font-['Nunito_Sans'] font-normal text-2xl mb-4">о нашем походе</h3>
-            <h2 class="text-[#18121E] font-['Nunito_Sans'] font-extrabold text-[32px] leading-[150%] mb-6">Исследуйте все горные массивы мира вместе с нами</h2>
-            <p class="text-[#18121E] font-['Nunito_Sans'] font-normal text-[18px] leading-[120%] mb-10">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической латинской литературе.</p>
-            <button id="tour-program-button" class="px-8 py-3 bg-[#1A3E3E] text-white font-semibold rounded-lg cursor-pointer hover:bg-white hover:text-[#1A3E3E] hover:border hover:border-[#1A3E3E] duration-300 ease-in-out transition-all">Программа тура</button>
+        <div id="tour-program-description" class="tour-description">
+            <h3 class="section-subtitle">о нашем походе</h3>
+            <h2 class="section-title">Исследуйте все горные массивы мира вместе с нами</h2>
+            <p class="section-text">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической латинской литературе.</p>
+            <button id="tour-program-button" class="tour-btn">Программа тура</button>
         </div>
     </div>
 </section>
-<section id="tour-offer-section" class="w-full bg-[#F3F5F4] h-[771px] pt-[80px]">
-    <div class="max-w-[1180px]">
-        <div id="our-tours-offer" class="min-h-[580px] max-h-[580px] min-w-[591px] max-w-[591px] ml-[170px]" >
-            <h3 class="text-[#F2BE22] font-['Nunito_Sans'] font-normal text-[24px] leading-5 mb-[8px]">наше предложение</h3>
-            <h2 class="text-[#18121E] font-['Nunito_Sans'] font-extrabold text-[32px] leading-[120%] mb-[30px]">Лучшие программы для тебя</h2>
-            <span class="text-[#18121E] font-['Nunito_Sans'] font-normal text-[18px] leading-[150%]">Его корни уходят в один фрагмент классической латыни 45 года<br>н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</span>
-            <div id="services-list" class="mt-10 ml-[65px]">
+<section id="tour-offer-section" class="offer-section">
+    <div class="offer-wrapper">
+        <div id="our-tours-offer" class="offer-content">
+            <h3 class="section-subtitle">наше предложение</h3>
+            <h2 class="section-title">Лучшие программы для тебя</h2>
+            <span class="section-text">Его корни уходят в один фрагмент классической латыни 45 года<br>н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</span>
+            <div id="services-list" class="services-list">
                 @for (service of services; track service.id) {
-                    <div class="mb-[40px] font-['Nunito_Sans'] transition-all duration-300 ease-out hover:scale-[1.06] origin-left cursor-pointer bg-white/40 hover:bg-white/80 rounded-lg p-3">
-                        <img [src]="'/images/' + service.image" [alt]="service.title" class="w-[50px] h-[50px] -ml-[65px] -mb-[55px]">
-                        <h3 class="text-[18px] leading-5 tracking-[1.2%] font-bold text-[#1A3E3E]">{{ service.title }}</h3>
-                        <p class="font-normal text-[14px] leading-5 tracking-[0%] text-gray-700">{{ service.description }}</p>
+                    <div class="service-item">
+                        <img [src]="'/images/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
+                        <h3 class="service-title">{{ service.title }}</h3>
+                        <p class="service-description">{{ service.description }}</p>
                     </div>
                 }
             </div>
-            <button id="program-price-button" class="w-[236px] h-[52px]  px-[36px] py-4 bg-[#1A3E3E] text-white font-semibold text-base leading-5 tracking-[1,2%] rounded-md cursor-pointer hover:bg-[#1A3E3E]/60 transition-all duration-300 ease-in-out">Стоимость программ</button>
+            <button id="program-price-button" class="price-btn">Стоимость программ</button>
         </div>
-        <div id="offer-image-container" class="w-[510px] h-[510px] grid grid-cols-2 gap-4 ml-[810px] -mt-[550px]">
-            <img src="/images/top-left-icon.jpg" alt="Top Left Icon" class="w-[250px] h-[250px]">
-            <img src="/images/top-right-icon.jpg" alt="Top Right Icon" class="w-[250px] h-[250px]">
-            <img src="/images/bottom-left-icon.jpg" alt="Bottom Left Icon" class="w-[250px] h-[250px]">
-            <img src="/images/bottom-right-icon.jpg" alt="Bottom Right Icon" class="w-[250px] h-[250px]">
+        <div id="offer-image-container" class="offer-images">
+            <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
+            <img src="/images/top-right.jpg" alt="Top Right" class="offer-img">
+            <img src="/images/bottom-left.jpg" alt="Bottom Left" class="offer-img">
+            <img src="/images/bottom-right.jpg" alt="Bottom Right" class="offer-img">
         </div>
-    
     </div>
 </section>
-</div>
+}

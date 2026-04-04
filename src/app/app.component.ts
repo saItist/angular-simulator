@@ -1,5 +1,5 @@
 import './training';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { IService } from '../interfaces/IService';
@@ -13,87 +13,49 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule],
 })
 
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
 
   companyName: string = 'Румтибет';
-  public location: string = '';
-  public date: string = '';
-  public participants: number | null = null;
-  public locations: string[] = ['Горы', 'Лес', 'Пустыня', 'Океан'];
-  public participantOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  public isLoading: boolean = true;
+  location: string = '';
+  date: string = '';
+  participants: number | null = null;
+  locations: string[] = ['Горы', 'Лес', 'Пустыня', 'Океан'];
+  participantOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  isLoading: boolean = true;
 
-  public currentMode: 'date' | 'clicker' = 'clicker';
-  public currentTime: string = '';
-  public clickCounter: number = 0;
-  private timerId: ReturnType<typeof setInterval> | null = null;
-  public liveText: string = '';
+  currentMode: 'date' | 'clicker' = 'clicker';
+  currentTime: string = '';
+  clickCounter: number = 0;
+  liveText: string = '';
 
   constructor() {
     this.saveLastVisitDate();
     this.incrementVisitCount();
-  }
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoading = false;
-      if (this.currentMode === 'date') {
-        this.startDateTimer();
-      }
-    }, 2000);
+    this.isLoading = false;
+    setInterval(() => {
+      this.currentTime = new Date().toLocaleString('ru-RU');
+    }, 1000);
   }
 
-  public toggleMode(): void {
-    if (this.currentMode === 'date') {
-      this.currentMode = 'clicker';
-      this.stopDateTimer();
-    } else {
-      this.currentMode = 'date';
-      this.startDateTimer();
-    }
+  toggleMode(mode: 'date' | 'clicker'): void {
+    this.currentMode = mode;
   }
 
-  public incrementClickCounter(): void {
+  incrementClickCounter(): void {
     this.clickCounter += 1;
   }
 
-  public decrementClickCounter(): void {
+  decrementClickCounter(): void {
     if (this.clickCounter > 0) {
       this.clickCounter -= 1;
     }
   }
 
-  private startDateTimer(): void {
-    this.updateCurrentTime();
-    this.timerId = setInterval(() => this.updateCurrentTime(), 1000);
-  }
-
-  private stopDateTimer(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-      this.timerId = null;
-    }
-  }
-
-  private updateCurrentTime(): void {
-    const now = new Date();
-    const day = now.getDate().toString().padStart(2, '0');
-    const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const year = now.getFullYear();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    this.currentTime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
-  }
-
-  ngOnDestroy(): void {
-    this.stopDateTimer();
-  }
-
-  public isFormValid(): boolean {
+  isFormValid(): boolean {
     return !!this.location && !!this.date && this.participants !== null && this.participants > 0;
   }
 
-  public searchProgram(): void {
+  searchProgram(): void {
     if (this.isFormValid()) {
       console.log('Поиск с параметрами:', {
         location: this.location,
@@ -124,19 +86,19 @@ export class AppComponent implements OnInit, OnDestroy {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'people-icon.svg'
+      image: 'people-icon'
     },
     { 
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'shield-icon.svg'
+      image: 'shield-icon'
     },
     { 
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'label-icon.svg'
+      image: 'label-icon'
     },
   ]
 }
