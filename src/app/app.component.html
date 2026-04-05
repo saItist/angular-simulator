@@ -4,112 +4,126 @@
 </div>
 } @else {
 <header class="header-bg">
-    <div class="header-overlay"></div>
-    <div class="header-content">
-        <div class="logo-section">
-            <img src="/images/logo-mountain-icon.svg" alt="Logo" class="logo-img"/>
-            <h1 class="logo-text">{{ companyName }}</h1>
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <div class="logo-section">
+      <img src="/images/logo-mountain-icon.svg" alt="Logo" class="logo-img" />
+      <h1 class="logo-text">{{ companyName }}</h1>
+    </div>
+    <nav class="nav">
+      <div class="nav-links">
+        <a href="#" id="nav-home-link" class="nav-link">Главная</a>
+        <a href="#" id="nav-guide-link" class="nav-link">Про гида</a>
+        <a href="#" id="nav-tour-program-link" class="nav-link">Программа тура</a>
+        <a href="#" id="nav-pricing-link" class="nav-link">Стоимость</a>
+        <a href="#" id="nav-blog-link" class="nav-link">Блог</a>
+        <a href="#" id="nav-contacts-link" class="nav-link">Контакты</a>
+      </div>
+      <div class="nav-buttons">
+        <button id="consultation-button" class="consultation-btn">Консультация</button>
+        @if (currentMode === 'date') {
+          <button id="show-clicker-button" type="button" (click)="toggleMode('clicker')" class="mode-btn">
+            Показать кликер
+          </button>
+        } @else {
+          <button id="show-date-button" type="button" (click)="toggleMode('date')" class="mode-btn">
+            Показать дату
+          </button>
+        }
+        <div class="time-display">
+          @if (currentMode === 'date') {
+            <span class="time-text">Текущее время: {{ currentTime }}</span>
+          } @else {
+            <div class="clicker-controls">
+              <button id="clicker-decrement" type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0"
+              class="clicker-btn">-</button>
+              <span id="clicker-count" class="clicker-count">{{ clickCounter }}</span>
+              <button id="clicker-increment" type="button" (click)="incrementClickCounter()" class="clicker-btn">+</button>
+            </div>
+          }
         </div>
-        <nav class="nav">
-            <div class="nav-links">
-                <a href="#" id="nav-home-link" class="nav-link">Главная</a>
-                <a href="#" id="nav-guide-link" class="nav-link">Про гида</a>
-                <a href="#" id="nav-tour-program-link" class="nav-link">Программа тура</a>
-                <a href="#" id="nav-pricing-link" class="nav-link">Стоимость</a>
-                <a href="#" id="nav-blog-link" class="nav-link">Блог</a>
-                <a href="#" id="nav-contacts-link" class="nav-link">Контакты</a>
-            </div>
-            <div class="nav-buttons">
-                <button id="consultation-button" class="consultation-btn">Консультация</button>
-                <button type="button" (click)="toggleMode(currentMode === 'date' ? 'clicker' : 'date')" class="mode-btn">{{ currentMode === 'date' ? 'Показать кликер' : 'Показать дату' }}</button>
-                <div class="time-display">
-                    @if (currentMode === 'date') {
-                        <span class="time-text">Текущее время: {{ currentTime }}</span>
-                    } @else {
-                        <div class="clicker-controls">
-                            <button type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0" class="clicker-btn">-</button>
-                            <span class="clicker-count">{{ clickCounter }}</span>
-                            <button type="button" (click)="incrementClickCounter()" class="clicker-btn">+</button>
-                        </div>
-                    }
-                </div>
-            </div>
-         </nav>
+      </div>
+    </nav>
 
+  </div>
+  <div class="hero-title">
+    <h1 class="hero-title-text">
+      Насладись прогулкой в горах<br>с командой единомышленников
+    </h1>
+  </div>
+  <div id="search-form" class="search-form">
+    <div class="search-inputs">
+      <div class="input-group">
+        <select [(ngModel)]="location" id="location-button" class="select-input">
+          <option value="">Локация для тура</option>
+          <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+        </select>
+        <div class="input-label">выберите из списка</div>
+      </div>
+      <div class="input-group">
+        <input type="date" [(ngModel)]="date" id="date-button" class="select-input">
+        <div class="input-label">укажите дату</div>
+      </div>
+      <div class="input-group">
+        <select [(ngModel)]="participants" id="participants-button" class="select-input">
+          <option value="">Выберите количество участников</option>
+          <option *ngFor="let option of participantOptions" [value]="option">{{ option }}</option>
+        </select>
+        <div class="input-label">укажите кол-во участников</div>
+      </div>
+      <button type="button" id="search-button" [disabled]="!isFormValid()" class="search-btn">Найти
+        программу</button>
     </div>
-    <div class="hero-title">
-        <h1 class="hero-title-text">
-            Насладись прогулкой в горах<br>с командой единомышленников
-        </h1>
-    </div>
-    <div id="search-form" class="search-form">
-        <div class="search-inputs">
-            <div class="input-group">
-                <select [(ngModel)]="location" id="location-button" class="select-input">
-                    <option value="">Локация для тура</option>
-                    <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
-                </select>
-                <div class="input-label">выберите из списка</div>
-            </div>
-            <div class="input-group">
-                <input type="date" [(ngModel)]="date" id="date-button" class="select-input">
-                <div class="input-label">укажите дату</div>
-            </div>
-            <div class="input-group">
-                <select [(ngModel)]="participants" id="participants-button" class="select-input">
-                    <option value="">Выберите количество участников</option>
-                    <option *ngFor="let option of participantOptions" [value]="option">{{ option }}</option>
-                </select>
-                <div class="input-label">укажите кол-во участников</div>
-            </div>
-            <button type="button" id="search-button" [disabled]="!isFormValid()" class="search-btn">Найти программу</button>
-        </div>
-    </div>
-    <div class="live-text-section">
-        <input [(ngModel)]="liveText" type="text" placeholder="Введите текст" class="live-input">
-        <span class="live-display">{{ liveText }}</span>
-    </div>
+  </div>
+  <div class="live-text-section">
+    <input [(ngModel)]="liveText" type="text" placeholder="Введите текст" class="live-input">
+    <span class="live-display">{{ liveText }}</span>
+  </div>
 </header>
 <section id="mountain-explore-section" class="explore-section">
-    <div id="explore-mountains-container" class="explore-container">
-        <div id="hero-images-container" class="hero-images">
-            <img src="/images/mountain-peak.jpg" alt="Mountain Peak" class="mountain-peak">
-            <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="mountain-cabin">
-        </div>
-        <div id="play-button-container" class="play-button">
-            <img src="/images/play-icon.svg" alt="Play Icon" class="play-icon">
-        </div>
-        <div id="tour-program-description" class="tour-description">
-            <h3 class="section-subtitle">о нашем походе</h3>
-            <h2 class="section-title">Исследуйте все горные массивы мира вместе с нами</h2>
-            <p class="section-text">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической латинской литературе.</p>
-            <button id="tour-program-button" class="tour-btn">Программа тура</button>
-        </div>
+  <div id="explore-mountains-container" class="explore-container">
+    <div id="hero-images-container" class="hero-images">
+      <img src="/images/mountain-peak.jpg" alt="Mountain Peak" class="mountain-peak">
+      <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="mountain-cabin">
     </div>
+    <div id="play-button-container" class="play-button">
+      <img src="/images/play-icon.svg" alt="Play Icon" class="play-icon">
+    </div>
+    <div id="tour-program-description" class="tour-description">
+      <h3 class="section-subtitle">о нашем походе</h3>
+      <h2 class="section-title">Исследуйте все горные массивы мира вместе с нами</h2>
+      <p class="section-text">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более
+        двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния,
+        взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической
+        латинской литературе.</p>
+      <button id="tour-program-button" class="tour-btn">Программа тура</button>
+    </div>
+  </div>
 </section>
 <section id="tour-offer-section" class="offer-section">
-    <div class="offer-wrapper">
-        <div id="our-tours-offer" class="offer-content">
-            <h3 class="section-subtitle">наше предложение</h3>
-            <h2 class="section-title">Лучшие программы для тебя</h2>
-            <span class="section-text">Его корни уходят в один фрагмент классической латыни 45 года<br>н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</span>
-            <div id="services-list" class="services-list">
-                @for (service of services; track service.id) {
-                    <div class="service-item">
-                        <img [src]="'/images/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
-                        <h3 class="service-title">{{ service.title }}</h3>
-                        <p class="service-description">{{ service.description }}</p>
-                    </div>
-                }
-            </div>
-            <button id="program-price-button" class="price-btn">Стоимость программ</button>
+  <div class="offer-wrapper">
+    <div id="our-tours-offer" class="offer-content">
+      <h3 class="section-subtitle">наше предложение</h3>
+      <h2 class="section-title">Лучшие программы для тебя</h2>
+      <span class="section-text">Его корни уходят в один фрагмент классической латыни 45 года<br>н.э., то есть
+        более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</span>
+      <div id="services-list" class="services-list">
+        @for (service of services; track service.id) {
+        <div class="service-item">
+          <img [src]="'/images/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
+          <h3 class="service-title">{{ service.title }}</h3>
+          <p class="service-description">{{ service.description }}</p>
         </div>
-        <div id="offer-image-container" class="offer-images">
-            <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
-            <img src="/images/top-right.jpg" alt="Top Right" class="offer-img">
-            <img src="/images/bottom-left.jpg" alt="Bottom Left" class="offer-img">
-            <img src="/images/bottom-right.jpg" alt="Bottom Right" class="offer-img">
-        </div>
+        }
+      </div>
+      <button id="program-price-button" class="price-btn">Стоимость программ</button>
     </div>
+    <div id="offer-image-container" class="offer-images">
+      <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
+      <img src="/images/top-right.jpg" alt="Top Right" class="offer-img">
+      <img src="/images/bottom-left.jpg" alt="Bottom Left" class="offer-img">
+      <img src="/images/bottom-right.jpg" alt="Bottom Right" class="offer-img">
+    </div>
+  </div>
 </section>
 }
