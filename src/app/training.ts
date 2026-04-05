@@ -60,7 +60,9 @@ export function formatText(text: string, format: TextFormat): string {
   }
 }
 //фильтрация пользователей старше 18 лет
-const adultUsers: IUser[] = users.filter((user: IUser) => user.age >= 18);
+export function filterUsersOlderThan18(users: IUser[]): IUser[] {
+  return users.filter((user: IUser) => user.age >= 18);
+}
 // Удаляет все вхождения указанного символа из строки
 export function removeChar(text: string, char: string): string {
   return text.replaceAll(char, '');

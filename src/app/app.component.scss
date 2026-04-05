@@ -1,0 +1,540 @@
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #18121e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/load-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.header-bg {
+  position: relative;
+  width: 100%;
+  background-image: url('/images/mountains-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 985px;
+}
+
+.header-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 120px;
+  background-color: rgba(24, 18, 30, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.header-content {
+  margin: 0 auto;
+  padding-top: 24px;
+  display: flex;
+  height: 72px;
+  width: 1180px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 20;
+  position: relative;
+}
+
+.logo-section {
+  margin: 0 auto;
+  padding-top: 24px;
+  width: 1180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 96px;
+}
+
+.logo-img {
+  width: 130px;
+  height: 72px;
+}
+
+.logo-text {
+  color: white;
+  margin-top: 0;
+  font-size: 20px;
+  font-family: 'Nunito_Sans';
+  letter-spacing: 0.6rem;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 830px;
+  height: 44px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: white;
+  width: 625px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.consultation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: white;
+  color: #1A3E3E;
+  font-weight: 600;
+  font-size: 18px;
+  transition: all 300ms ease-in-out;
+  width: 180px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.consultation-btn:hover {
+  background-color: #1A3E3E;
+  color: white;
+  border: 2px solid white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mode-btn {
+  padding: 4px 16px;
+  border-radius: 4px;
+  background-color: white;
+  color: #1A3E3E;
+  font-weight: 600;
+}
+
+.mode-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.time-display {
+  color: white;
+  text-align: right;
+}
+
+.time-text {
+  font-size: 14px;
+}
+
+.clicker-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.clicker-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: white;
+  color: #1A3E3E;
+}
+
+.clicker-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clicker-count {
+  font-size: 14px;
+}
+
+.hero-title {
+  position: absolute;
+  left: 50%;
+  top: 550px;
+  transform: translateX(-50%);
+  width: 1080px;
+  height: 150px;
+  text-align: center;
+}
+
+.hero-title-text {
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.3;
+  font-size: 50px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  color: white;
+}
+
+.search-form {
+  position: absolute;
+  left: calc(50% + 45px);
+  top: calc(550px + 150px + 51px);
+  transform: translateX(-50%);
+  width: 1180px;
+  height: 161px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+.search-inputs {
+  display: flex;
+  align-items: center;
+  width: 1115px;
+  height: 81px;
+  padding-left: 20px;
+  gap: 24px;
+  position: relative;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.select-input {
+  width: 270px;
+  height: 52px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.select-input:hover {
+  background-color: rgba(255, 255, 255, 0.65);
+  color: #1A3E3E;
+  border-color: #1A3E3E;
+}
+
+.input-label {
+  position: absolute;
+  left: 40px;
+  bottom: -10px;
+  font-size: 14px;
+  font-family: 'Nunito_Sans';
+  font-weight: 400;
+  color: white;
+}
+
+.search-btn {
+  width: 213px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: #1A3E3E;
+  color: white;
+  font-family: 'Nunito_Sans';
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: white;
+  color: #1A3E3E;
+  border: 1px solid white;
+}
+
+.search-btn:disabled {
+  background-color: #9ca3af;
+  color: #4b5563;
+  cursor: not-allowed;
+}
+
+.search-btn:disabled:hover {
+  background-color: #9ca3af;
+  color: #4b5563;
+  border: none;
+}
+
+.live-text-section {
+  position: absolute;
+  left: 50%;
+  top: calc(550px + 150px + 51px + 161px + 20px);
+  transform: translateX(-50%);
+  width: 600px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.live-input {
+  width: 300px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+}
+
+.live-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.live-input:hover {
+  background-color: rgba(255, 255, 255, 0.65);
+  color: #1A3E3E;
+  border-color: #1A3E3E;
+}
+
+.live-display {
+  color: white;
+  font-size: 18px;
+}
+
+.explore-section {
+  width: 100%;
+  background-color: white;
+  height: 771px;
+  padding-top: 80px;
+  padding-left: 220px;
+  padding-right: 220px;
+}
+
+.explore-container {
+  height: 562px;
+  max-width: 1180px;
+  min-width: 1180px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-images {
+  width: 562px;
+  height: 526px;
+  margin-left: -70px;
+}
+
+.mountain-peak {
+  width: 350px;
+  height: 400px;
+  z-index: 30;
+}
+
+.mountain-cabin {
+  width: 350px;
+  height: 400px;
+  margin-left: 130px;
+  margin-top: -270px;
+  z-index: 10;
+  border-radius: 24px;
+}
+
+.play-button {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin-left: 220px;
+  margin-top: 135px;
+  position: absolute;
+  padding: 12px;
+}
+
+.play-icon {
+  width: 14px;
+  height: 15px;
+  z-index: 40;
+}
+
+.tour-description {
+  min-width: 580px;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.section-subtitle {
+  color: #F2BE22;
+  font-family: 'Nunito_Sans';
+  font-weight: 400;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  color: #18121E;
+  font-family: 'Nunito_Sans';
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 150%;
+  margin-bottom: 24px;
+}
+
+.section-text {
+  color: #18121E;
+  font-family: 'Nunito_Sans';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  margin-bottom: 40px;
+}
+
+.tour-btn {
+  padding: 12px 32px;
+  background-color: #1A3E3E;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.tour-btn:hover {
+  background-color: white;
+  color: #1A3E3E;
+  border: 1px solid #1A3E3E;
+}
+
+.offer-section {
+  width: 100%;
+  background-color: #F3F5F4;
+  height: 771px;
+  padding-top: 80px;
+}
+
+.offer-wrapper {
+  max-width: 1180px;
+}
+
+.offer-content {
+  min-height: 580px;
+  max-height: 580px;
+  min-width: 591px;
+  max-width: 591px;
+  margin-left: 170px;
+}
+
+.services-list {
+  margin-top: 40px;
+  margin-left: 65px;
+}
+
+.service-item {
+  margin-bottom: 40px;
+  font-family: 'Nunito_Sans';
+  transition: all 300ms ease-out;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.service-item:hover {
+  transform: scale(1.06);
+  transform-origin: left;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  margin-left: -65px;
+  margin-bottom: -55px;
+}
+
+.service-title {
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  font-weight: 700;
+  color: #1A3E3E;
+}
+
+.service-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #374151;
+}
+
+.price-btn {
+  width: 236px;
+  height: 52px;
+  padding: 16px 36px;
+  background-color: #1A3E3E;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.price-btn:hover {
+  background-color: rgba(26, 62, 62, 0.6);
+}
+
+.offer-images {
+  width: 510px;
+  height: 510px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-left: 810px;
+  margin-top: -550px;
+}
+
+.offer-img {
+  width: 250px;
+  height: 250px;
+}
