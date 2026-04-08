@@ -99,6 +99,33 @@ export class AppComponent {
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       image: 'label-icon'
+    }
+  ];
+
+  popularTours = [
+    {
+      id: 1,
+      image: 'lake-mountain',
+      title: 'Озеро возле гор',
+      description: 'романтическое приключение',
+      rating: 4.9,
+      price: 480
     },
-  ]
+    {
+      id: 2,
+      image: 'night-mountain',
+      title: 'Ночь в горах',
+      description: 'в компании друзей',
+      rating: 4.5,
+      price: 500
+    },
+    {
+      id: 3,
+      image: 'stretching-mountain',
+      title: 'Растяжка в горах',
+      description: 'для тех, кто заботится о себе',
+      rating: 5.0,
+      price: 230
+    }
+  ];
 }

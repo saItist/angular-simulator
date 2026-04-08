@@ -126,4 +126,26 @@
     </div>
   </div>
 </section>
+<section class="popular-tours-section">
+  <h3 class="section-subtitle">по версии отдыхающих</h3>
+  <h2 class="section-title">Популярные направления</h2>
+  <div id="popular-tours-container" class="popular-tours">
+    @for (tour of popularTours; track tour.id) {
+    <div class="tour-card">
+      <img class="tour-image" [src]="'/images/popular-tours/' + tour.image + '.jpg'" [alt]="tour.title"/>
+      <div class="tour-overlay"></div>
+      <div class="tour-rating">
+        <img src="/images/popular-tours/star-icon.svg" alt="Star" class="star-icon"/>
+        <span class="rating-value">{{ tour.rating | number:'1.1-1' }}</span>
+      </div>
+      <div class="tour-content">
+        <h3 class="tour-name">{{ tour.title }}</h3>
+        <p class="tour-description">{{ tour.description }}</p>
+        <div class="tour-price">{{ tour.price | currency:'USD':'symbol':'1.0-0' }}</div>
+      </div>
+    </div>
+    }
+  </div>
+  <button class="rating-btn">Рейтинг направлений</button>
+</section>
 }
