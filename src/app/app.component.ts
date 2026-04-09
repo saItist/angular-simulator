@@ -37,8 +37,6 @@ export class AppComponent {
   clickCounter: number = 0;
   liveText: string = '';
 
-  readonly messageIconPath: string = '/images/icons/message-icon.svg';
-  readonly closeIconPath: string = '/images/icons/close-btn-icon.svg';
   messages: IMessage[] = this.messageService.messages;
 
   services: IService[] = [
@@ -132,15 +130,28 @@ export class AppComponent {
     }
   ];
 
-  private clockIntervalId!: ReturnType<typeof setInterval>;
-
   constructor() {
     this.saveLastVisitDate();
     this.incrementVisitCount();
     this.isLoading = false;
-    this.clockIntervalId = setInterval(() => {
+    setInterval(() => {
       this.currentTime = new Date().toLocaleString('ru-RU');
     }, 1000);
+  }
+
+  private saveLastVisitDate(): void {
+    const formattedDate: string = new Date().toLocaleString();
+    this.storageService.setItem<string>('last-visit-date', formattedDate);
+  }
+
+  private incrementVisitCount(): void {
+    const currentCount: number = this.storageService.getItem<number>('visit-count') ?? 0;
+    this.storageService.setItem<number>('visit-count', currentCount + 1);
+  }
+
+  private isPrimaryColor(color: Color): boolean {
+    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return primaryColors.includes(color);
   }
 
   isFormValid(): boolean {
@@ -187,21 +198,6 @@ export class AppComponent {
 
   closeMessage(messageId: number): void {
     this.messageService.closeMessage(messageId);
-  }
-
-  private saveLastVisitDate(): void {
-    const formattedDate: string = new Date().toLocaleString();
-    this.storageService.setItem<string>('last-visit-date', formattedDate);
-  }
-
-  private incrementVisitCount(): void {
-    const currentCount: number = this.storageService.getItem<number>('visit-count') ?? 0;
-    this.storageService.setItem<number>('visit-count', currentCount + 1);
-  }
-
-  private isPrimaryColor(color: Color): boolean {
-    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-    return primaryColors.includes(color);
   }
 
 }

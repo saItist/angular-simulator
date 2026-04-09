@@ -11,13 +11,13 @@
 
 <ng-template #messageTemplate let-message>
   <article class="message-toast" [ngClass]="'message-' + message.type.toLowerCase()">
-    <img [src]="messageIconPath" [alt]="message.type + ' icon'" class="message-icon" />
+    <img src="/images/icons/message-icon.svg" [alt]="message.type + ' icon'" class="message-icon" />
     <div class="message-content">
       <h3 class="message-title">{{ message.type }}</h3>
       <p class="message-text">{{ message.text }}</p>
     </div>
     <button type="button" class="message-close" (click)="closeMessage(message.id)" aria-label="Закрыть сообщение">
-      <img [src]="closeIconPath" alt="Close icon" class="message-close-icon" />
+      <img src="/images/icons/close-btn-icon.svg" alt="Close icon" class="message-close-icon" />
     </button>
   </article>
 </ng-template>
