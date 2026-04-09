@@ -3,11 +3,30 @@
   <div class="spinner"></div>
 </div>
 } @else {
+<div class="message-stack">
+  @for (message of messages; track message.id) {
+    <ng-container [ngTemplateOutlet]="messageTemplate" [ngTemplateOutletContext]="{ $implicit: message }"></ng-container>
+  }
+</div>
+
+<ng-template #messageTemplate let-message>
+  <article class="message-toast" [ngClass]="'message-' + message.type.toLowerCase()">
+    <img [src]="messageIconPath" [alt]="message.type + ' icon'" class="message-icon" />
+    <div class="message-content">
+      <h3 class="message-title">{{ message.type }}</h3>
+      <p class="message-text">{{ message.text }}</p>
+    </div>
+    <button type="button" class="message-close" (click)="closeMessage(message.id)" aria-label="Закрыть сообщение">
+      <img [src]="closeIconPath" alt="Close icon" class="message-close-icon" />
+    </button>
+  </article>
+</ng-template>
+
 <header class="header-bg">
   <div class="header-overlay"></div>
   <div class="header-content">
     <div class="logo-section">
-      <img src="/images/logo-mountain-icon.svg" alt="Logo" class="logo-img" />
+      <img src="/images/icons/logo-mountain-icon.svg" alt="Logo" class="logo-img" />
       <h1 class="logo-text">{{ companyName }}</h1>
     </div>
     <nav class="nav">
@@ -87,7 +106,7 @@
       <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="mountain-cabin">
     </div>
     <div id="play-button-container" class="play-button">
-      <img src="/images/play-icon.svg" alt="Play Icon" class="play-icon">
+      <img src="/images/icons/play-icon.svg" alt="Play Icon" class="play-icon">
     </div>
     <div id="tour-program-description" class="tour-description">
       <h3 class="section-subtitle">о нашем походе</h3>
@@ -96,7 +115,7 @@
         двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния,
         взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической
         латинской литературе.</p>
-      <button id="tour-program-button" class="tour-btn">Программа тура</button>
+      <button id="tour-program-button" type="button" (click)="showTourProgramMessage()" class="tour-btn">Программа тура</button>
     </div>
   </div>
 </section>
@@ -110,13 +129,13 @@
       <div id="services-list" class="services-list">
         @for (service of services; track service.id) {
         <div class="service-item">
-          <img [src]="'/images/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
+          <img [src]="'/images/icons/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
           <h3 class="service-title">{{ service.title }}</h3>
           <p class="service-description">{{ service.description }}</p>
         </div>
         }
       </div>
-      <button id="program-price-button" class="price-btn">Стоимость программ</button>
+      <button id="program-price-button" type="button" (click)="showProgramPriceMessage()" class="price-btn">Стоимость программ</button>
     </div>
     <div id="offer-image-container" class="offer-images">
       <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
@@ -146,6 +165,28 @@
     </div>
     }
   </div>
-  <button class="rating-btn">Рейтинг направлений</button>
+  <button type="button" (click)="showRatingMessage()" class="rating-btn">Рейтинг направлений</button>
+</section>
+<section class="blog-section">
+  <h3 class="blog-subtitle">делимся впечатлениями</h3>
+  <h2 class="blog-title">Блог о путешествиях</h2>
+  <div class="blog-cards">
+    @for (post of blogPosts; track post.id) {
+      <article class="blog-card" [ngClass]="post.positionClass">
+        <img [src]="'/images/blog-posts/' + post.image + '.jpg'" [alt]="post.alt" class="blog-card-image" />
+        <div class="blog-card-content">
+          <div class="blog-card-body">
+            <h3 class="blog-card-heading">{{ post.title }}</h3>
+            <p class="blog-card-text">{{ post.description }}</p>
+          </div>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">{{ post.date }}</span>
+            <a href="#" class="blog-card-link">{{ post.linkText }}</a>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+  <button type="button" (click)="showBlogMaterialsMessage()" class="blog-more-btn">Другие материалы</button>
 </section>
 }

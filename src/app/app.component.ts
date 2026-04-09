@@ -1,10 +1,14 @@
 import './training';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from '../collection';
+import { MessageType } from '../enums/MessageType';
 import { IService } from '../interfaces/IService';
+import { IMessage } from '../interfaces/IMessage';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MessageService } from './services/message.service';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +17,7 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule],
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   companyName: string = 'Румтибет';
   location: string = '';
@@ -28,13 +32,29 @@ export class AppComponent {
   clickCounter: number = 0;
   liveText: string = '';
 
-  constructor() {
+  readonly messageIconPath: string = '/images/icons/message-icon.svg';
+  readonly closeIconPath: string = '/images/icons/close-icon.svg';
+
+  private clockIntervalId!: ReturnType<typeof setInterval>;
+
+  constructor(
+    private readonly storageService: StorageService,
+    private readonly messageService: MessageService
+  ) {
     this.saveLastVisitDate();
     this.incrementVisitCount();
     this.isLoading = false;
-    setInterval(() => {
+    this.clockIntervalId = setInterval(() => {
       this.currentTime = new Date().toLocaleString('ru-RU');
     }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.clockIntervalId);
+  }
+
+  get messages(): IMessage[] {
+    return this.messageService.messages;
   }
 
   toggleMode(mode: 'date' | 'clicker'): void {
@@ -63,17 +83,48 @@ export class AppComponent {
         participants: this.participants
       });
     }
-  } 
+  }
+
+  showTourProgramMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.WARN,
+      text: 'Программа недоступна'
+    });
+  }
+
+  showProgramPriceMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.INFO,
+      text: 'Стоимость отправлена на почту'
+    });
+  }
+
+  showRatingMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.SUCCESS,
+      text: 'Направления получены'
+    });
+  }
+
+  showBlogMaterialsMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.ERROR,
+      text: 'Материалы недоступны'
+    });
+  }
+
+  closeMessage(messageId: number): void {
+    this.messageService.closeMessage(messageId);
+  }
 
   saveLastVisitDate(): void {
     const formattedDate: string = new Date().toLocaleString();
-    localStorage.setItem('last-visit-date', formattedDate);
+    this.storageService.setItem<string>('last-visit-date', formattedDate);
   }
 
   incrementVisitCount(): void {
-    let count: number = Number(localStorage.getItem('visit-count')) || 0;
-    count += 1;
-    localStorage.setItem('visit-count', count.toString());
+    const currentCount = this.storageService.getItem<number>('visit-count') ?? 0;
+    this.storageService.setItem<number>('visit-count', currentCount + 1);
   }
 
   isPrimaryColor(color: Color): boolean {
@@ -126,6 +177,49 @@ export class AppComponent {
       description: 'для тех, кто заботится о себе',
       rating: 5.0,
       price: 230
+    }
+  ];
+
+  blogPosts = [
+    {
+      id: 1,
+      positionClass: 'blog-card-top-left',
+      image: 'mountain-city',
+      alt: 'Город в горах',
+      title: 'Красивая Италия, какая она в реальности?',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 2,
+      positionClass: 'blog-card-top-right',
+      image: 'ocean-flight',
+      alt: 'Море с самолёта',
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description: 'Для современного мира базовый вектор развития предполагает соответствующие условия реализации, независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 3,
+      positionClass: 'blog-card-bottom-left',
+      image: 'street-walker',
+      alt: 'Человек идёт по улице',
+      title: 'Как подготовиться к путешествию в одиночку?',
+      description: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 4,
+      positionClass: 'blog-card-bottom-right',
+      image: 'taj-mahal',
+      alt: 'Мечеть в Индии',
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
     }
   ];
 }
