@@ -21,6 +21,9 @@ import { StorageService } from './services/storage.service';
 
 export class AppComponent {
 
+  private readonly storageService: StorageService = inject(StorageService);
+  private readonly messageService: MessageService = inject(MessageService);
+
   companyName: string = 'Румтибет';
   location: string = '';
   date: string = '';
@@ -36,96 +39,22 @@ export class AppComponent {
 
   readonly messageIconPath: string = '/images/icons/message-icon.svg';
   readonly closeIconPath: string = '/images/icons/close-btn-icon.svg';
-
-  private readonly storageService: StorageService = inject(StorageService);
-  private readonly messageService: MessageService = inject(MessageService);
   messages: IMessage[] = this.messageService.messages;
-  private clockIntervalId!: ReturnType<typeof setInterval>;
-
-  constructor() {
-    this.saveLastVisitDate();
-    this.incrementVisitCount();
-    this.isLoading = false;
-    this.clockIntervalId = setInterval(() => {
-      this.currentTime = new Date().toLocaleString('ru-RU');
-    }, 1000);
-  }
-
-  isFormValid(): boolean {
-    return !!this.location && !!this.date && this.participants !== null && this.participants > 0;
-  }
-
-  searchProgram(): void {
-    if (this.isFormValid()) {
-      console.log('Поиск с параметрами:', {
-        location: this.location,
-        date: this.date,
-        participants: this.participants
-      });
-    }
-  }
-
-  showTourProgramMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.WARN,
-      text: 'Программа недоступна'
-    });
-  }
-
-  showProgramPriceMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.INFO,
-      text: 'Стоимость отправлена на почту'
-    });
-  }
-
-  showRatingMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.SUCCESS,
-      text: 'Направления получены'
-    });
-  }
-
-  showBlogMaterialsMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.ERROR,
-      text: 'Материалы недоступны'
-    });
-  }
-
-  closeMessage(messageId: number): void {
-    this.messageService.closeMessage(messageId);
-  }
-
-  saveLastVisitDate(): void {
-    const formattedDate: string = new Date().toLocaleString();
-    this.storageService.setItem<string>('last-visit-date', formattedDate);
-  }
-
-  incrementVisitCount(): void {
-    const currentCount = this.storageService.getItem<number>('visit-count') ?? 0;
-    this.storageService.setItem<number>('visit-count', currentCount + 1);
-  }
-
-  isPrimaryColor(color: Color): boolean {
-    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-    return primaryColors.includes(color);
-  }
 
   services: IService[] = [
-    { 
+    {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       image: 'people-icon'
     },
-    { 
+    {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       image: 'shield-icon'
     },
-    { 
+    {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
@@ -202,4 +131,77 @@ export class AppComponent {
       linkText: 'читать статью'
     }
   ];
+
+  private clockIntervalId!: ReturnType<typeof setInterval>;
+
+  constructor() {
+    this.saveLastVisitDate();
+    this.incrementVisitCount();
+    this.isLoading = false;
+    this.clockIntervalId = setInterval(() => {
+      this.currentTime = new Date().toLocaleString('ru-RU');
+    }, 1000);
+  }
+
+  isFormValid(): boolean {
+    return !!this.location && !!this.date && this.participants !== null && this.participants > 0;
+  }
+
+  searchProgram(): void {
+    if (this.isFormValid()) {
+      console.log('Поиск с параметрами:', {
+        location: this.location,
+        date: this.date,
+        participants: this.participants
+      });
+    }
+  }
+
+  showTourProgramMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.WARN,
+      text: 'Программа недоступна'
+    });
+  }
+
+  showProgramPriceMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.INFO,
+      text: 'Стоимость отправлена на почту'
+    });
+  }
+
+  showRatingMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.SUCCESS,
+      text: 'Направления получены'
+    });
+  }
+
+  showBlogMaterialsMessage(): void {
+    this.messageService.addMessage({
+      type: MessageType.ERROR,
+      text: 'Материалы недоступны'
+    });
+  }
+
+  closeMessage(messageId: number): void {
+    this.messageService.closeMessage(messageId);
+  }
+
+  private saveLastVisitDate(): void {
+    const formattedDate: string = new Date().toLocaleString();
+    this.storageService.setItem<string>('last-visit-date', formattedDate);
+  }
+
+  private incrementVisitCount(): void {
+    const currentCount: number = this.storageService.getItem<number>('visit-count') ?? 0;
+    this.storageService.setItem<number>('visit-count', currentCount + 1);
+  }
+
+  private isPrimaryColor(color: Color): boolean {
+    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return primaryColors.includes(color);
+  }
+
 }
