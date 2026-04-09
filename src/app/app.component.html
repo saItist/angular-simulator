@@ -41,11 +41,11 @@
       <div class="nav-buttons">
         <button id="consultation-button" class="consultation-btn">Консультация</button>
         @if (currentMode === 'date') {
-          <button id="show-clicker-button" type="button" (click)="toggleMode('clicker')" class="mode-btn">
+          <button id="show-clicker-button" type="button" (click)="currentMode = 'clicker'" class="mode-btn">
             Показать кликер
           </button>
         } @else {
-          <button id="show-date-button" type="button" (click)="toggleMode('date')" class="mode-btn">
+          <button id="show-date-button" type="button" (click)="currentMode = 'date'" class="mode-btn">
             Показать дату
           </button>
         }
@@ -54,10 +54,10 @@
             <span class="time-text">Текущее время: {{ currentTime }}</span>
           } @else {
             <div class="clicker-controls">
-              <button id="clicker-decrement" type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0"
+              <button id="clicker-decrement" type="button" (click)="clickCounter = clickCounter > 0 ? clickCounter - 1 : 0" [disabled]="clickCounter === 0"
               class="clicker-btn">-</button>
               <span id="clicker-count" class="clicker-count">{{ clickCounter }}</span>
-              <button id="clicker-increment" type="button" (click)="incrementClickCounter()" class="clicker-btn">+</button>
+              <button id="clicker-increment" type="button" (click)="clickCounter = clickCounter + 1" class="clicker-btn">+</button>
             </div>
           }
         </div>

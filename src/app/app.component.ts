@@ -1,10 +1,12 @@
 import './training';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from '../collection';
 import { MessageType } from '../enums/MessageType';
 import { IService } from '../interfaces/IService';
 import { IMessage } from '../interfaces/IMessage';
+import { IBlogPost } from '../interfaces/IBlogPost';
+import { IPopularTour } from '../interfaces/IPopularTour';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MessageService } from './services/message.service';
@@ -17,7 +19,7 @@ import { StorageService } from './services/storage.service';
   imports: [FormsModule, CommonModule],
 })
 
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 
   companyName: string = 'Румтибет';
   location: string = '';
@@ -33,42 +35,20 @@ export class AppComponent implements OnDestroy {
   liveText: string = '';
 
   readonly messageIconPath: string = '/images/icons/message-icon.svg';
-  readonly closeIconPath: string = '/images/icons/close-icon.svg';
+  readonly closeIconPath: string = '/images/icons/close-btn-icon.svg';
 
+  private readonly storageService: StorageService = inject(StorageService);
+  private readonly messageService: MessageService = inject(MessageService);
+  messages: IMessage[] = this.messageService.messages;
   private clockIntervalId!: ReturnType<typeof setInterval>;
 
-  constructor(
-    private readonly storageService: StorageService,
-    private readonly messageService: MessageService
-  ) {
+  constructor() {
     this.saveLastVisitDate();
     this.incrementVisitCount();
     this.isLoading = false;
     this.clockIntervalId = setInterval(() => {
       this.currentTime = new Date().toLocaleString('ru-RU');
     }, 1000);
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.clockIntervalId);
-  }
-
-  get messages(): IMessage[] {
-    return this.messageService.messages;
-  }
-
-  toggleMode(mode: 'date' | 'clicker'): void {
-    this.currentMode = mode;
-  }
-
-  incrementClickCounter(): void {
-    this.clickCounter += 1;
-  }
-
-  decrementClickCounter(): void {
-    if (this.clickCounter > 0) {
-      this.clickCounter -= 1;
-    }
   }
 
   isFormValid(): boolean {
@@ -153,7 +133,7 @@ export class AppComponent implements OnDestroy {
     }
   ];
 
-  popularTours = [
+  popularTours: IPopularTour[] = [
     {
       id: 1,
       image: 'lake-mountain',
@@ -164,7 +144,7 @@ export class AppComponent implements OnDestroy {
     },
     {
       id: 2,
-      image: 'night-mountain',
+      image: 'night-in-mountains',
       title: 'Ночь в горах',
       description: 'в компании друзей',
       rating: 4.5,
@@ -180,11 +160,11 @@ export class AppComponent implements OnDestroy {
     }
   ];
 
-  blogPosts = [
+  blogPosts: IBlogPost[] = [
     {
       id: 1,
       positionClass: 'blog-card-top-left',
-      image: 'mountain-city',
+      image: 'italy-city',
       alt: 'Город в горах',
       title: 'Красивая Италия, какая она в реальности?',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
