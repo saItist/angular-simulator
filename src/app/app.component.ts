@@ -37,7 +37,9 @@ export class AppComponent {
   clickCounter: number = 0;
   liveText: string = '';
 
-  messages: IMessage[] = this.messageService.messages;
+  get messages(): IMessage[] {
+    return this.messageService.messages;
+  }
 
   services: IService[] = [
     {

@@ -5,60 +5,18 @@ import { IMessage } from '../../interfaces/IMessage';
   providedIn: 'root'
 })
 export class MessageService {
-  private readonly _messages: IMessage[] = [];
-  private readonly timers = new Map<number, ReturnType<typeof setTimeout>>();
-  private readonly hideDelayMs = 5000;
-  private readonly maxMessages = 7;
   private nextId = 1;
 
-  public get messages(): IMessage[] {
-    return this._messages;
+  messages: IMessage[] = [];
+
+  addMessage(message: Omit<IMessage, 'id'>): void {
+    const newMessage: IMessage = { id: this.nextId++, ...message };
+
+    this.messages = [newMessage, ...this.messages].slice(0, 7);
+    setTimeout(() => this.closeMessage(newMessage.id), 5000);
   }
 
-  public addMessage(message: Omit<IMessage, 'id'>): void {
-    const newMessage: IMessage = {
-      id: this.nextId++,
-      ...message
-    };
-
-    this._messages.unshift(newMessage);
-    this.scheduleClose(newMessage.id);
-
-    if (this._messages.length > this.maxMessages) {
-      const removedMessages = this._messages.splice(this.maxMessages);
-      removedMessages.forEach(({ id }) => this.clearTimer(id));
-    }
-  }
-
-  public closeMessage(messageId: number): void {
-    const messageIndex = this._messages.findIndex((message) => message.id === messageId);
-
-    if (messageIndex === -1) {
-      return;
-    }
-
-    this._messages.splice(messageIndex, 1);
-    this.clearTimer(messageId);
-  }
-
-  private scheduleClose(messageId: number): void {
-    this.clearTimer(messageId);
-
-    const timerId = setTimeout(() => {
-      this.closeMessage(messageId);
-    }, this.hideDelayMs);
-
-    this.timers.set(messageId, timerId);
-  }
-
-  private clearTimer(messageId: number): void {
-    const currentTimer = this.timers.get(messageId);
-
-    if (!currentTimer) {
-      return;
-    }
-
-    clearTimeout(currentTimer);
-    this.timers.delete(messageId);
+  closeMessage(messageId: number): void {
+    this.messages = this.messages.filter(({ id }) => id !== messageId);
   }
 }
