@@ -10,7 +10,7 @@ import { IPopularTour } from '../interfaces/IPopularTour';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MessageService } from './services/message.service';
-import { StorageService } from './services/storage.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +21,8 @@ import { StorageService } from './services/storage.service';
 
 export class AppComponent {
 
-  private readonly storageService: StorageService = inject(StorageService);
-  private readonly messageService: MessageService = inject(MessageService);
+  private storageService: LocalStorageService = inject(LocalStorageService);
+  private messageService: MessageService = inject(MessageService);
 
   companyName: string = 'Румтибет';
   location: string = '';
@@ -31,6 +31,8 @@ export class AppComponent {
   locations: string[] = ['Горы', 'Лес', 'Пустыня', 'Океан'];
   participantOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   isLoading: boolean = true;
+
+  MessageType: typeof MessageType = MessageType;
 
   currentMode: 'date' | 'clicker' = 'clicker';
   currentTime: string = '';
@@ -170,32 +172,8 @@ export class AppComponent {
     }
   }
 
-  showTourProgramMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.WARN,
-      text: 'Программа недоступна'
-    });
-  }
-
-  showProgramPriceMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.INFO,
-      text: 'Стоимость отправлена на почту'
-    });
-  }
-
-  showRatingMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.SUCCESS,
-      text: 'Направления получены'
-    });
-  }
-
-  showBlogMaterialsMessage(): void {
-    this.messageService.addMessage({
-      type: MessageType.ERROR,
-      text: 'Материалы недоступны'
-    });
+  addMessage(type: MessageType, text: string): void {
+    this.messageService.addMessage({ type, text });
   }
 
   closeMessage(messageId: number): void {

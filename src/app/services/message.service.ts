@@ -5,7 +5,8 @@ import { IMessage } from '../../interfaces/IMessage';
   providedIn: 'root'
 })
 export class MessageService {
-  private nextId = 1;
+
+  private nextId: number = 1;
 
   messages: IMessage[] = [];
 
@@ -17,6 +18,7 @@ export class MessageService {
   }
 
   closeMessage(messageId: number): void {
-    this.messages = this.messages.filter(({ id }) => id !== messageId);
+    this.messages = this.messages.filter((message: IMessage) => message.id !== messageId);
   }
+
 }
