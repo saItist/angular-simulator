@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class LocalStorageService {
 
   setItem<T>(key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value));

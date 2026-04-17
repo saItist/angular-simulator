@@ -21,7 +21,7 @@ import { LocalStorageService } from './services/local-storage.service';
 
 export class AppComponent {
 
-  private storageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   private messageService: MessageService = inject(MessageService);
 
   companyName: string = 'Румтибет';
@@ -32,7 +32,7 @@ export class AppComponent {
   participantOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   isLoading: boolean = true;
 
-  MessageType: typeof MessageType = MessageType;
+  messageType: typeof MessageType = MessageType;
 
   currentMode: 'date' | 'clicker' = 'clicker';
   currentTime: string = '';
@@ -145,12 +145,12 @@ export class AppComponent {
 
   private saveLastVisitDate(): void {
     const formattedDate: string = new Date().toLocaleString();
-    this.storageService.setItem<string>('last-visit-date', formattedDate);
+    this.localStorageService.setItem<string>('last-visit-date', formattedDate);
   }
 
   private incrementVisitCount(): void {
-    const currentCount: number = this.storageService.getItem<number>('visit-count') ?? 0;
-    this.storageService.setItem<number>('visit-count', currentCount + 1);
+    const currentCount: number = this.localStorageService.getItem<number>('visit-count') ?? 0;
+    this.localStorageService.setItem<number>('visit-count', currentCount + 1);
   }
 
   private isPrimaryColor(color: Color): boolean {

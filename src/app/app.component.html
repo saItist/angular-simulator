@@ -102,7 +102,7 @@
         двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния,
         взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической
         латинской литературе.</p>
-      <button id="tour-program-button" type="button" (click)="addMessage(MessageType.WARN, 'Программа недоступна')" class="tour-btn">Программа тура</button>
+      <button id="tour-program-button" type="button" (click)="addMessage(messageType.WARN, 'Программа недоступна')" class="tour-btn">Программа тура</button>
     </div>
   </div>
 </section>
@@ -122,7 +122,7 @@
         </div>
         }
       </div>
-      <button id="program-price-button" type="button" (click)="addMessage(MessageType.INFO, 'Стоимость отправлена на почту')" class="price-btn">Стоимость программ</button>
+      <button id="program-price-button" type="button" (click)="addMessage(messageType.INFO, 'Стоимость отправлена на почту')" class="price-btn">Стоимость программ</button>
     </div>
     <div id="offer-image-container" class="offer-images">
       <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
@@ -152,7 +152,7 @@
     </div>
     }
   </div>
-  <button type="button" (click)="addMessage(MessageType.SUCCESS, 'Направления получены')" class="rating-btn">Рейтинг направлений</button>
+  <button type="button" (click)="addMessage(messageType.SUCCESS, 'Направления получены')" class="rating-btn">Рейтинг направлений</button>
 </section>
 <section class="blog-section">
   <h3 class="blog-subtitle">делимся впечатлениями</h3>
@@ -174,7 +174,7 @@
       </article>
     }
   </div>
-  <button type="button" (click)="addMessage(MessageType.ERROR, 'Материалы недоступны')" class="blog-more-btn">Другие материалы</button>
+  <button type="button" (click)="addMessage(messageType.ERROR, 'Материалы недоступны')" class="blog-more-btn">Другие материалы</button>
 </section>
 }
 
