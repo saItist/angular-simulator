@@ -3,11 +3,17 @@
   <div class="spinner"></div>
 </div>
 } @else {
+<div class="message-stack">
+  @for (message of messages; track message.id) {
+    <ng-container [ngTemplateOutlet]="messageTemplate" [ngTemplateOutletContext]="{ $implicit: message }"></ng-container>
+  }
+</div>
+
 <header class="header-bg">
   <div class="header-overlay"></div>
   <div class="header-content">
     <div class="logo-section">
-      <img src="/images/logo-mountain-icon.svg" alt="Logo" class="logo-img" />
+      <img src="/images/icons/logo-mountain-icon.svg" alt="Logo" class="logo-img" />
       <h1 class="logo-text">{{ companyName }}</h1>
     </div>
     <nav class="nav">
@@ -22,11 +28,11 @@
       <div class="nav-buttons">
         <button id="consultation-button" class="consultation-btn">Консультация</button>
         @if (currentMode === 'date') {
-          <button id="show-clicker-button" type="button" (click)="toggleMode('clicker')" class="mode-btn">
+          <button id="show-clicker-button" type="button" (click)="currentMode = 'clicker'" class="mode-btn">
             Показать кликер
           </button>
         } @else {
-          <button id="show-date-button" type="button" (click)="toggleMode('date')" class="mode-btn">
+          <button id="show-date-button" type="button" (click)="currentMode = 'date'" class="mode-btn">
             Показать дату
           </button>
         }
@@ -35,10 +41,10 @@
             <span class="time-text">Текущее время: {{ currentTime }}</span>
           } @else {
             <div class="clicker-controls">
-              <button id="clicker-decrement" type="button" (click)="decrementClickCounter()" [disabled]="clickCounter === 0"
+              <button id="clicker-decrement" type="button" (click)="clickCounter = clickCounter > 0 ? clickCounter - 1 : 0" [disabled]="clickCounter === 0"
               class="clicker-btn">-</button>
               <span id="clicker-count" class="clicker-count">{{ clickCounter }}</span>
-              <button id="clicker-increment" type="button" (click)="incrementClickCounter()" class="clicker-btn">+</button>
+              <button id="clicker-increment" type="button" (click)="clickCounter = clickCounter + 1" class="clicker-btn">+</button>
             </div>
           }
         </div>
@@ -87,7 +93,7 @@
       <img src="/images/mountain-cabin.jpg" alt="Mountain Cabin" class="mountain-cabin">
     </div>
     <div id="play-button-container" class="play-button">
-      <img src="/images/play-icon.svg" alt="Play Icon" class="play-icon">
+      <img src="/images/icons/play-icon.svg" alt="Play Icon" class="play-icon">
     </div>
     <div id="tour-program-description" class="tour-description">
       <h3 class="section-subtitle">о нашем походе</h3>
@@ -96,7 +102,7 @@
         двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния,
         взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической
         латинской литературе.</p>
-      <button id="tour-program-button" class="tour-btn">Программа тура</button>
+      <button id="tour-program-button" type="button" (click)="addMessage(messageType.WARN, 'Программа недоступна')" class="tour-btn">Программа тура</button>
     </div>
   </div>
 </section>
@@ -110,13 +116,13 @@
       <div id="services-list" class="services-list">
         @for (service of services; track service.id) {
         <div class="service-item">
-          <img [src]="'/images/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
+          <img [src]="'/images/icons/' + service.image + '.svg'" [alt]="service.title" class="service-icon">
           <h3 class="service-title">{{ service.title }}</h3>
           <p class="service-description">{{ service.description }}</p>
         </div>
         }
       </div>
-      <button id="program-price-button" class="price-btn">Стоимость программ</button>
+      <button id="program-price-button" type="button" (click)="addMessage(messageType.INFO, 'Стоимость отправлена на почту')" class="price-btn">Стоимость программ</button>
     </div>
     <div id="offer-image-container" class="offer-images">
       <img src="/images/top-left.jpg" alt="Top Left" class="offer-img">
@@ -126,4 +132,61 @@
     </div>
   </div>
 </section>
+<section class="popular-tours-section">
+  <h3 class="section-subtitle">по версии отдыхающих</h3>
+  <h2 class="section-title">Популярные направления</h2>
+  <div id="popular-tours-container" class="popular-tours">
+    @for (tour of popularTours; track tour.id) {
+    <div class="tour-card">
+      <img class="tour-image" [src]="'/images/popular-tours/' + tour.image + '.jpg'" [alt]="tour.title"/>
+      <div class="tour-overlay"></div>
+      <div class="tour-rating">
+        <img src="/images/popular-tours/star-icon.svg" alt="Star" class="star-icon"/>
+        <span class="rating-value">{{ tour.rating | number:'1.1-1' }}</span>
+      </div>
+      <div class="tour-content">
+        <h3 class="tour-name">{{ tour.title }}</h3>
+        <p class="tour-description">{{ tour.description }}</p>
+        <div class="tour-price">{{ tour.price | currency:'USD':'symbol':'1.0-0' }}</div>
+      </div>
+    </div>
+    }
+  </div>
+  <button type="button" (click)="addMessage(messageType.SUCCESS, 'Направления получены')" class="rating-btn">Рейтинг направлений</button>
+</section>
+<section class="blog-section">
+  <h3 class="blog-subtitle">делимся впечатлениями</h3>
+  <h2 class="blog-title">Блог о путешествиях</h2>
+  <div class="blog-cards">
+    @for (post of blogPosts; track post.id) {
+      <article class="blog-card" [ngClass]="post.positionClass">
+        <img [src]="'/images/blog-posts/' + post.image + '.jpg'" [alt]="post.alt" class="blog-card-image" />
+        <div class="blog-card-content">
+          <div class="blog-card-body">
+            <h3 class="blog-card-heading">{{ post.title }}</h3>
+            <p class="blog-card-text">{{ post.description }}</p>
+          </div>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">{{ post.date }}</span>
+            <a href="#" class="blog-card-link">{{ post.linkText }}</a>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+  <button type="button" (click)="addMessage(messageType.ERROR, 'Материалы недоступны')" class="blog-more-btn">Другие материалы</button>
+</section>
 }
+
+<ng-template #messageTemplate let-message>
+  <article class="message-toast" [ngClass]="'message-' + message.type.toLowerCase()">
+    <img src="/images/icons/message-icon.svg" [alt]="message.type + ' icon'" class="message-icon" />
+    <div class="message-content">
+      <h3 class="message-title">{{ message.type }}</h3>
+      <p class="message-text">{{ message.text }}</p>
+    </div>
+    <button type="button" class="message-close" (click)="closeMessage(message.id)" aria-label="Закрыть сообщение">
+      <img src="/images/icons/close-btn-icon.svg" alt="Close icon" class="message-close-icon" />
+    </button>
+  </article>
+</ng-template>

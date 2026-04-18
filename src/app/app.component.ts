@@ -1,10 +1,16 @@
 import './training';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from '../collection';
+import { MessageType } from '../enums/MessageType';
 import { IService } from '../interfaces/IService';
+import { IMessage } from '../interfaces/IMessage';
+import { IBlogPost } from '../interfaces/IBlogPost';
+import { IPopularTour } from '../interfaces/IPopularTour';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MessageService } from './services/message.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +21,9 @@ import { CommonModule } from '@angular/common';
 
 export class AppComponent {
 
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private messageService: MessageService = inject(MessageService);
+
   companyName: string = 'Румтибет';
   location: string = '';
   date: string = '';
@@ -23,10 +32,107 @@ export class AppComponent {
   participantOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   isLoading: boolean = true;
 
+  messageType: typeof MessageType = MessageType;
+
   currentMode: 'date' | 'clicker' = 'clicker';
   currentTime: string = '';
   clickCounter: number = 0;
   liveText: string = '';
+
+  get messages(): IMessage[] {
+    return this.messageService.messages;
+  }
+
+  services: IService[] = [
+    {
+      id: 1,
+      title: 'Опытный гид',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      image: 'people-icon'
+    },
+    {
+      id: 2,
+      title: 'Безопасный поход',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      image: 'shield-icon'
+    },
+    {
+      id: 3,
+      title: 'Лояльные цены',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      image: 'label-icon'
+    }
+  ];
+
+  popularTours: IPopularTour[] = [
+    {
+      id: 1,
+      image: 'lake-mountain',
+      title: 'Озеро возле гор',
+      description: 'романтическое приключение',
+      rating: 4.9,
+      price: 480
+    },
+    {
+      id: 2,
+      image: 'night-in-mountains',
+      title: 'Ночь в горах',
+      description: 'в компании друзей',
+      rating: 4.5,
+      price: 500
+    },
+    {
+      id: 3,
+      image: 'stretching-mountain',
+      title: 'Растяжка в горах',
+      description: 'для тех, кто заботится о себе',
+      rating: 5.0,
+      price: 230
+    }
+  ];
+
+  blogPosts: IBlogPost[] = [
+    {
+      id: 1,
+      positionClass: 'blog-card-top-left',
+      image: 'italy-city',
+      alt: 'Город в горах',
+      title: 'Красивая Италия, какая она в реальности?',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 2,
+      positionClass: 'blog-card-top-right',
+      image: 'ocean-flight',
+      alt: 'Море с самолёта',
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description: 'Для современного мира базовый вектор развития предполагает соответствующие условия реализации, независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 3,
+      positionClass: 'blog-card-bottom-left',
+      image: 'street-walker',
+      alt: 'Человек идёт по улице',
+      title: 'Как подготовиться к путешествию в одиночку?',
+      description: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    },
+    {
+      id: 4,
+      positionClass: 'blog-card-bottom-right',
+      image: 'taj-mahal',
+      alt: 'Мечеть в Индии',
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      linkText: 'читать статью'
+    }
+  ];
 
   constructor() {
     this.saveLastVisitDate();
@@ -37,18 +143,19 @@ export class AppComponent {
     }, 1000);
   }
 
-  toggleMode(mode: 'date' | 'clicker'): void {
-    this.currentMode = mode;
+  private saveLastVisitDate(): void {
+    const formattedDate: string = new Date().toLocaleString();
+    this.localStorageService.setItem<string>('last-visit-date', formattedDate);
   }
 
-  incrementClickCounter(): void {
-    this.clickCounter += 1;
+  private incrementVisitCount(): void {
+    const currentCount: number = this.localStorageService.getItem<number>('visit-count') ?? 0;
+    this.localStorageService.setItem<number>('visit-count', currentCount + 1);
   }
 
-  decrementClickCounter(): void {
-    if (this.clickCounter > 0) {
-      this.clickCounter -= 1;
-    }
+  private isPrimaryColor(color: Color): boolean {
+    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return primaryColors.includes(color);
   }
 
   isFormValid(): boolean {
@@ -63,42 +170,14 @@ export class AppComponent {
         participants: this.participants
       });
     }
-  } 
-
-  saveLastVisitDate(): void {
-    const formattedDate: string = new Date().toLocaleString();
-    localStorage.setItem('last-visit-date', formattedDate);
   }
 
-  incrementVisitCount(): void {
-    let count: number = Number(localStorage.getItem('visit-count')) || 0;
-    count += 1;
-    localStorage.setItem('visit-count', count.toString());
+  addMessage(type: MessageType, text: string): void {
+    this.messageService.addMessage({ type, text });
   }
 
-  isPrimaryColor(color: Color): boolean {
-    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
-    return primaryColors.includes(color);
+  closeMessage(messageId: number): void {
+    this.messageService.closeMessage(messageId);
   }
 
-  services: IService[] = [
-    { 
-      id: 1,
-      title: 'Опытный гид',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'people-icon'
-    },
-    { 
-      id: 2,
-      title: 'Безопасный поход',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'shield-icon'
-    },
-    { 
-      id: 3,
-      title: 'Лояльные цены',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      image: 'label-icon'
-    },
-  ]
 }
