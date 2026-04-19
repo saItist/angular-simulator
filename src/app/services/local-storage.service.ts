@@ -13,7 +13,7 @@ export class LocalStorageService {
     try {
       const storedValue: string | null = localStorage.getItem(key);
       return storedValue ? JSON.parse(storedValue) as T : null;
-    } catch (error: unknown) {
+    } catch {
       return null;
     }
   }
