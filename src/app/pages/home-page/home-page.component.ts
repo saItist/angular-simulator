@@ -12,7 +12,8 @@ import { MessageService } from '../../services/message.service';
   imports: [CommonModule],
 })
 export class HomePageComponent {
-  protected messageService = inject(MessageService);
+
+  protected messageService: MessageService = inject(MessageService);
 
   services: IService[] = [
     {
@@ -104,4 +105,5 @@ export class HomePageComponent {
       linkText: 'читать статью'
     }
   ];
+
 }

@@ -13,6 +13,7 @@ import { MessageComponent } from './components/message/message.component';
   imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
 })
 export class AppComponent {
+
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   isLoading: boolean = true;
@@ -32,4 +33,5 @@ export class AppComponent {
     const currentCount: number = this.localStorageService.getItem<number>('visit-count') ?? 0;
     this.localStorageService.setItem<number>('visit-count', currentCount + 1);
   }
+
 }

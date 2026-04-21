@@ -9,9 +9,11 @@ import { MessageService } from '../../services/message.service';
   imports: [NgClass],
 })
 export class MessageComponent {
+
   protected messageService: MessageService = inject(MessageService);
 
   closeMessage(messageId: number): void {
     this.messageService.closeMessage(messageId);
   }
+
 }
