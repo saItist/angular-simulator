@@ -13,7 +13,7 @@ import { Mode } from '../../enums/Mode';
 })
 export class HeaderComponent {
 
-  protected readonly Mode = Mode;
+  mode: typeof Mode = Mode;
 
   companyName: string = 'Румтибет';
 

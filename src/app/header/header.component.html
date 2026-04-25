@@ -18,17 +18,17 @@
       </div>
       <div class="nav-buttons">
         <button id="consultation-button" class="consultation-btn">Консультация</button>
-        @if (currentMode === Mode.DATE) {
-          <button id="show-clicker-button" type="button" (click)="currentMode = Mode.CLICKER" class="mode-btn">
+        @if (currentMode === mode.DATE) {
+          <button id="show-clicker-button" type="button" (click)="currentMode = mode.CLICKER" class="mode-btn">
             Показать кликер
           </button>
         } @else {
-          <button id="show-date-button" type="button" (click)="currentMode = Mode.DATE" class="mode-btn">
+          <button id="show-date-button" type="button" (click)="currentMode = mode.DATE" class="mode-btn">
             Показать дату
           </button>
         }
         <div class="time-display">
-          @if (currentMode === Mode.DATE) {
+          @if (currentMode === mode.DATE) {
             <span class="time-text">Текущее время: {{ currentTime }}</span>
           } @else {
             <div class="clicker-controls">
