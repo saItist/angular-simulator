@@ -1,4 +1,3 @@
-// Интерфейсы для пользователей
 interface IUser {
   id: number;
   name: string;
@@ -12,11 +11,9 @@ interface IAdmin extends IUser {
   lastLoginAt?: Date;
 }
 
-// Типы для статусов и форматов текста
 type Status = 'loading' | 'success' | 'error';
 type TextFormat = 'uppercase' | 'lowercase' | 'capitalize';
 
-// Переменные
 let status: Status = 'loading';
 let textFormat: TextFormat = 'uppercase';
 const users: IUser[] = [
@@ -42,11 +39,10 @@ const users: IUser[] = [
   },
 ];
 
-// Функция возвращающая сумму двух чисел
 export function sum(a: number, b: number): number {
   return a + b;
 }
-// Функция форматирующая текст в зависимости от переданного формата
+
 export function formatText(text: string, format: TextFormat): string {
   switch (format) {
     case 'uppercase':
@@ -59,11 +55,11 @@ export function formatText(text: string, format: TextFormat): string {
       return text;
   }
 }
-//фильтрация пользователей старше 18 лет
+
 export function filterUsersOlderThan18(users: IUser[]): IUser[] {
   return users.filter((user: IUser) => user.age >= 18);
 }
-// Удаляет все вхождения указанного символа из строки
+
 export function removeChar(text: string, char: string): string {
   return text.replaceAll(char, '');
 }

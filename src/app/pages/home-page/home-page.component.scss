@@ -1,0 +1,671 @@
+.explore-section {
+  width: 100%;
+  background-color: white;
+  height: 771px;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.explore-container {
+  height: 562px;
+  max-width: 1180px;
+  min-width: 1180px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+}
+
+.offer-section {
+  width: 100%;
+  background-color: #F3F5F4;
+  height: 771px;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+.offer-wrapper {
+  max-width: 1180px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+}
+
+.hero-images {
+  width: 562px;
+  height: 526px;
+  margin-left: -70px;
+}
+
+.mountain-peak {
+  width: 350px;
+  height: 400px;
+  z-index: 30;
+}
+
+.mountain-cabin {
+  width: 350px;
+  height: 400px;
+  margin-left: 130px;
+  margin-top: -270px;
+  z-index: 10;
+  border-radius: 24px;
+}
+
+.play-button {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin-left: -630px;
+  margin-top: 135px;
+  position: absolute;
+  padding: 12px;
+}
+
+.play-icon {
+  width: 14px;
+  height: 15px;
+  z-index: 40;
+}
+
+.tour-description {
+  min-width: 580px;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.section-subtitle {
+  color: #F2BE22;
+  font-family: 'Nunito Sans';
+  font-weight: 300;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 150%;
+  margin-bottom: 24px;
+}
+
+.section-text {
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  margin-bottom: 40px;
+}
+
+.tour-btn {
+  padding: 12px 32px;
+  background-color: #1A3E3E;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.tour-btn:hover {
+  background-color: white;
+  color: #1A3E3E;
+  border: 1px solid #1A3E3E;
+}
+
+.offer-content {
+  min-width: 591px;
+  max-width: 591px;
+}
+
+.services-list {
+  margin-top: 40px;
+  margin-left: 65px;
+}
+
+.service-item {
+  margin-bottom: 40px;
+  font-family: 'Nunito Sans';
+  transition: all 300ms ease-out;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.service-item:hover {
+  transform: scale(1.06);
+  transform-origin: left;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  margin-left: -65px;
+  margin-bottom: -55px;
+}
+
+.service-title {
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  font-weight: 700;
+  color: #1A3E3E;
+}
+
+.service-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #374151;
+}
+
+.price-btn {
+  width: 236px;
+  height: 52px;
+  padding: 16px 36px;
+  background-color: #1A3E3E;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.price-btn:hover {
+  background-color: rgba(26, 62, 62, 0.6);
+}
+
+.offer-images {
+  width: 510px;
+  height: 510px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.offer-img {
+  width: 250px;
+  height: 250px;
+}
+
+.popular-tours-section {
+  width: 100%;
+  background-color: white;
+  height: 871px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
+
+.popular-tours-section .section-subtitle {
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.popular-tours-section .section-title {
+  font-family: 'Nunito Sans';
+  font-weight: 800;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.popular-tours {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1180px;
+}
+
+.tour-card {
+  position: relative;
+  width: 380px;
+  height: 500px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tour-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.tour-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 90px;
+  padding: 18px 136px 23px 32px;
+  box-sizing: border-box;
+  background-color: #FFFFFF33;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  color: white;
+}
+
+.tour-card .tour-rating {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 78px;
+  height: 40px;
+  background-color: rgba(253, 253, 253, 0.65);
+  border-radius: 8px 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  z-index: 10;
+  padding: 6px 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.rating-value {
+  font-size: 14px;
+  color: #1A3E3E;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0%;
+}
+
+.tour-name {
+  grid-area: name;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: 0;
+  margin-bottom: 0;
+}
+
+.tour-card .tour-description {
+  grid-area: description;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+  margin-bottom: 0;
+}
+
+.tour-price {
+  position: absolute;
+  right: 32px;
+  bottom: 23px;
+  width: 88px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF4D;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.rating-btn {
+  margin-top: 50px;
+  padding: 12px 32px;
+  background-color: #1A3E3E;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.rating-btn:hover {
+  background-color: white;
+  color: #1A3E3E;
+  border: 1px solid #1A3E3E;
+}
+
+.star-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.blog-section {
+  width: 100%;
+  height: 1036px;
+  background-color: #F3F5F4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 85px;
+  box-sizing: border-box;
+}
+
+.blog-subtitle {
+  margin: 0;
+  color: #F2BE22;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.blog-title {
+  margin: 8px 0 0;
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 800;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.blog-cards {
+  width: 1180px;
+  height: 648px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 580px);
+  grid-template-rows: repeat(2, 312px);
+  grid-template-areas:
+    'top-left top-right'
+    'bottom-left bottom-right';
+  column-gap: 20px;
+  row-gap: 24px;
+}
+
+.blog-card {
+  width: 580px;
+  height: 312px;
+  background-color: #FDFDFD;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.blog-card-top-left {
+  grid-area: top-left;
+}
+
+.blog-card-top-right {
+  grid-area: top-right;
+}
+
+.blog-card-bottom-right {
+  grid-area: bottom-right;
+}
+
+.blog-card-bottom-left {
+  grid-area: bottom-left;
+}
+
+.blog-card-image {
+  width: 230px;
+  height: 280px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.blog-card-content {
+  width: 294px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.blog-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-heading {
+  margin: 0;
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.blog-card-heading:hover {
+  text-decoration: underline;
+}
+
+.blog-card-text {
+  margin: 24px 0 0;
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 121px;
+}
+
+.blog-card-date {
+  color: #F2BE22;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.blog-card-link {
+  color: #1A3E3E;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.blog-card-link:hover {
+  color: #F2BE22;
+}
+
+.blog-more-btn {
+  width: 220px;
+  height: 52px;
+  margin-top: 50px;
+  background-color: #1A3E3E;
+  color: white;
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.2%;
+  border: 1px solid #1A3E3E;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.blog-more-btn:hover {
+  background-color: white;
+  color: #1A3E3E;
+  border-color: #1A3E3E;
+}
+
+.photo-report-section {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 95px;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+.photo-report-subtitle {
+  margin: 0;
+  color: #F2BE22;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.photo-report-title {
+  margin: 8px 0 0;
+  color: #18121E;
+  font-family: 'Nunito Sans';
+  font-weight: 800;
+  font-style: normal;
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.photo-report-grid {
+  width: 1180px;
+  height: 520px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 250px 250px;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.photo-report-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.photo-report-img:nth-child(1) {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.photo-report-img:nth-child(2) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.photo-report-img:nth-child(3) {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.photo-report-img:nth-child(4) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.photo-report-img:nth-child(5) {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+
+.photo-report-img:nth-child(6) {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.photo-report-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.photo-report-btn {
+  margin-top: 50px;
+  width: 180px;
+  height: 52px;
+  background-color: #1A3E3E;
+  color: #FDFDFD;
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  border: 1px solid #1A3E3E;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.photo-report-btn:hover {
+  background-color: #FDFDFD;
+  color: #1A3E3E;
+  transform: scale(1.04);
+}

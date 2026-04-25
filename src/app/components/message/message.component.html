@@ -1,0 +1,14 @@
+<div class="message-stack">
+  @for (message of messageService.messages; track message.id) {
+    <article class="message-toast" [ngClass]="'message-' + message.type.toLowerCase()">
+      <img src="/images/icons/message-icon.svg" [alt]="message.type + ' icon'" class="message-icon" />
+      <div class="message-content">
+        <h3 class="message-title">{{ message.type }}</h3>
+        <p class="message-text">{{ message.text }}</p>
+      </div>
+      <button type="button" class="message-close" (click)="closeMessage(message.id)" aria-label="Закрыть сообщение">
+        <img src="/images/icons/close-btn-icon.svg" alt="Close icon" class="message-close-icon" />
+      </button>
+    </article>
+  }
+</div>

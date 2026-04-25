@@ -1,0 +1,42 @@
+.not-found-page {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.not-found-code {
+  color: #1A3E3E;
+  font-family: 'Nunito Sans';
+  font-weight: 800;
+  font-size: 120px;
+  margin: 0 0 16px;
+  line-height: 1;
+}
+
+.not-found-text {
+  color: #374151;
+  font-family: 'Nunito Sans';
+  font-size: 24px;
+  margin: 0 0 32px;
+}
+
+.not-found-link {
+  padding: 12px 32px;
+  background-color: #1A3E3E;
+  color: white;
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #F2BE22;
+    color: #18121E;
+  }
+}

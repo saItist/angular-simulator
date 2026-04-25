@@ -1,0 +1,120 @@
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.message-stack {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.message-toast {
+  position: relative;
+  width: 350px;
+  min-height: 70px;
+  padding: 15px 40px 15px 15px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  background-color: #0F172AD9;
+  backdrop-filter: blur(6px);
+  animation: toast-slide-in 0.25s ease;
+  pointer-events: auto;
+}
+
+.message-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.message-content {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.message-title {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.message-text {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.message-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.message-close-icon {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.2s ease;
+}
+
+.message-close:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.message-close:hover .message-close-icon {
+  filter: invert(1);
+}
+
+.message-success .message-title {
+  color: #4ADE80;
+}
+
+.message-info .message-title {
+  color: #60A5FA;
+}
+
+.message-warn .message-title {
+  color: #FACC15;
+}
+
+.message-error .message-title {
+  color: #F87171;
+}
