@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IMessage } from '../../interfaces/IMessage';
 import { MessageType } from '../../enums/MessageType';
 
@@ -9,12 +10,15 @@ export class MessageService {
 
   private nextId: number = 1;
 
-  messages: IMessage[] = [];
+  private messagesSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
+
+  messages$: Observable<IMessage[]> = this.messagesSubject.asObservable();
 
   private addMessage(message: Omit<IMessage, 'id'>): void {
     const newMessage: IMessage = { id: this.nextId++, ...message };
+    const updated: IMessage[] = [newMessage, ...this.messagesSubject.getValue()].slice(0, 7);
 
-    this.messages = [newMessage, ...this.messages].slice(0, 7);
+    this.messagesSubject.next(updated);
     setTimeout(() => this.closeMessage(newMessage.id), 5000);
   }
 
@@ -35,7 +39,9 @@ export class MessageService {
   }
 
   closeMessage(messageId: number): void {
-    this.messages = this.messages.filter((message: IMessage) => message.id !== messageId);
+    const updated: IMessage[] = this.messagesSubject.getValue().filter((m: IMessage) => m.id !== messageId);
+
+    this.messagesSubject.next(updated);
   }
 
 }

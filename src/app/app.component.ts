@@ -5,23 +5,21 @@ import { LocalStorageService } from './services/local-storage.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MessageComponent } from './components/message/message.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MessageComponent, LoaderComponent],
 })
 export class AppComponent {
 
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
-  isLoading: boolean = true;
-
   constructor() {
     this.saveLastVisitDate();
     this.incrementVisitCount();
-    this.isLoading = false;
   }
 
   private saveLastVisitDate(): void {
