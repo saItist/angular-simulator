@@ -23,13 +23,12 @@ export class UserService {
     this.loaderService.showLoader();
 
     this.userApiService.getUsers().pipe(
-      tap((users) => this.usersSubject.next(users)),
       catchError(() => {
         this.messageService.showError('Не удалось загрузить список пользователей');
         return of([]);
       }),
       finalize(() => this.loaderService.hideLoader())
-    ).subscribe();
+    ).subscribe((users: IUser[]) => this.usersSubject.next(users));
   }
 
 }
