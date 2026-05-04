@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { IUser } from '../../../interfaces/IUser';
 
 @Component({
   selector: 'app-users-page',
@@ -10,7 +12,9 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersPageComponent implements OnInit {
 
-  protected userService: UserService = inject(UserService);
+  private userService: UserService = inject(UserService);
+
+  protected users$: Observable<IUser[]> = this.userService.users$;
 
   ngOnInit(): void {
     this.userService.loadUsers();

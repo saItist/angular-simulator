@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { IUser } from '../../interfaces/IUser';
 import { UserApiService } from './user-api.service';
 import { MessageService } from './message.service';

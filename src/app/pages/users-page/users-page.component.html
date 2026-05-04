@@ -2,7 +2,7 @@
   <h1 class="users-page-title">Список Пользователей</h1>
 
   <div class="users-grid">
-    @for (user of (userService.users$ | async) ?? []; track user.id) {
+    @for (user of (users$ | async) ?? []; track user.id) {
       <article class="user-card">
             <div class="user-card-header">
               <h2 class="user-card-name">{{ user.name }}</h2>
