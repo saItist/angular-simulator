@@ -13,9 +13,7 @@ export class UsersPageComponent implements OnInit {
   protected userService: UserService = inject(UserService);
 
   ngOnInit(): void {
-    this.userService.loadUsers().subscribe((users) => {
-      this.userService.setUsers(users);
-    });
+    this.userService.loadUsers();
   }
 
 }

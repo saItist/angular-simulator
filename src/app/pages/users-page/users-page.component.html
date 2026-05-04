@@ -1,11 +1,9 @@
 <div class="users-page">
   <h1 class="users-page-title">Список Пользователей</h1>
 
-  @if (userService.users$ | async; as users) {
-    @if (users.length > 0) {
-      <div class="users-grid">
-        @for (user of users; track user.id) {
-          <article class="user-card">
+  <div class="users-grid">
+    @for (user of (userService.users$ | async) ?? []; track user.id) {
+      <article class="user-card">
             <div class="user-card-header">
               <h2 class="user-card-name">{{ user.name }}</h2>
               <p class="user-card-username">{{ user.username }}</p>
@@ -73,12 +71,10 @@
               </ul>
             </section>
           </article>
-        }
-      </div>
-    } @else {
+    } @empty {
       <div class="users-empty">
         <button type="button" class="users-empty-btn">Нет пользователей для отображения</button>
       </div>
     }
-  }
+  </div>
 </div>
