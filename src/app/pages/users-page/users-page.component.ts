@@ -14,7 +14,7 @@ export class UsersPageComponent implements OnInit {
 
   private userService: UserService = inject(UserService);
 
-  protected users$: Observable<IUser[]> = this.userService.users$;
+  users$: Observable<IUser[]> = this.userService.users$;
 
   ngOnInit(): void {
     this.userService.loadUsers();
