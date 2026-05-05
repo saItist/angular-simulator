@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',
-  imports: [NgClass],
+  imports: [NgClass, AsyncPipe],
 })
 export class MessageComponent {
 
