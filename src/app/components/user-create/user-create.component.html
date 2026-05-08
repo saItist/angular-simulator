@@ -1,0 +1,63 @@
+<form class="user-create-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2 class="user-create-title">Создать пользователя</h2>
+
+  <div class="user-create-fields">
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-name">Имя <span class="user-create-required">*</span></label>
+      <input id="create-name" type="text" class="user-create-input" formControlName="name"
+        [class.user-create-input--error]="form.get('name')!.invalid && form.get('name')!.touched"
+        placeholder="Имя пользователя" />
+      @if (form.get('name')!.invalid && form.get('name')!.touched) {
+        <span class="user-create-error">Поле обязательно для заполнения</span>
+      }
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-username">Username</label>
+      <input id="create-username" type="text" class="user-create-input" formControlName="username"
+        placeholder="Никнейм" />
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-email">Email</label>
+      <input id="create-email" type="email" class="user-create-input" formControlName="email"
+        [class.user-create-input--error]="form.get('email')!.invalid && form.get('email')!.touched"
+        placeholder="example@mail.com" />
+      @if (form.get('email')!.invalid && form.get('email')!.touched) {
+        <span class="user-create-error">Введите корректный email</span>
+      }
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-phone">Телефон</label>
+      <input id="create-phone" type="text" class="user-create-input" formControlName="phone"
+        placeholder="+7 (___) ___-__-__" />
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-website">Веб-сайт</label>
+      <input id="create-website" type="text" class="user-create-input" formControlName="website"
+        placeholder="example.com" />
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-city">Город</label>
+      <input id="create-city" type="text" class="user-create-input" formControlName="city"
+        placeholder="Город" />
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-street">Улица</label>
+      <input id="create-street" type="text" class="user-create-input" formControlName="street"
+        placeholder="Улица" />
+    </div>
+
+    <div class="user-create-field">
+      <label class="user-create-label" for="create-company">Компания</label>
+      <input id="create-company" type="text" class="user-create-input" formControlName="companyName"
+        placeholder="Название компании" />
+    </div>
+  </div>
+
+  <button id="create-user-submit" type="submit" class="user-create-submit">Создать пользователя</button>
+</form>

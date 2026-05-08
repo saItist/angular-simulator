@@ -1,0 +1,73 @@
+<article class="user-card">
+  <div class="user-card-header">
+    <div class="user-card-header-info">
+      <h2 class="user-card-name">{{ user.name || 'Неизвестно' }}</h2>
+      <p class="user-card-username">{{ user.username || 'Неизвестно' }}</p>
+    </div>
+    <button id="delete-user-{{ user.id }}" type="button" class="user-card-delete-btn" (click)="onDelete()">
+      Удалить
+    </button>
+  </div>
+
+  <section class="user-card-section">
+    <h3 class="user-card-section-title">Контакты</h3>
+    <ul class="user-card-list">
+      <li class="user-card-row">
+        <span class="user-card-label">Эл. почта</span>
+        <a class="user-card-link" href="mailto:{{ user.email }}">{{ user.email || 'Неизвестно' }}</a>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Телефон</span>
+        <span class="user-card-value">{{ user.phone || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Веб-сайт</span>
+        <a class="user-card-link" href="http://{{ user.website }}" target="_blank">{{ user.website || 'Неизвестно' }}</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="user-card-section">
+    <h3 class="user-card-section-title">Адрес Проживания</h3>
+    <ul class="user-card-list">
+      <li class="user-card-row">
+        <span class="user-card-label">Город</span>
+        <span class="user-card-value">{{ user.address?.city || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Улица</span>
+        <span class="user-card-value">{{ user.address?.street || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Офис</span>
+        <span class="user-card-value">{{ user.address?.suite || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Индекс</span>
+        <span class="user-card-value">{{ user.address?.zipcode || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Координаты</span>
+        <span class="user-card-value">{{ user.address?.geo?.lat || 'Неизвестно' }}&nbsp;&nbsp;{{ user.address?.geo?.lng || 'Неизвестно' }}</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="user-card-section">
+    <h3 class="user-card-section-title">Место Работы</h3>
+    <ul class="user-card-list">
+      <li class="user-card-row">
+        <span class="user-card-label">Компания</span>
+        <span class="user-card-value">{{ user.company?.name || 'Неизвестно' }}</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Миссия</span>
+        <span class="user-card-value user-card-value--quote">&laquo;{{ user.company?.catchPhrase || 'Неизвестно' }}&raquo;</span>
+      </li>
+      <li class="user-card-row">
+        <span class="user-card-label">Стратегия</span>
+        <span class="user-card-value">{{ user.company?.bs || 'Неизвестно' }}</span>
+      </li>
+    </ul>
+  </section>
+</article>
