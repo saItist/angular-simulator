@@ -21,103 +21,12 @@
   margin: 0 auto;
 }
 
-.user-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  padding: 20px 24px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.user-card-header {
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.user-card-name {
-  font-family: 'Nunito Sans';
-  font-weight: 700;
-  font-size: 16px;
-  color: #18121e;
-  margin-bottom: 4px;
-}
-
-.user-card-username {
-  font-family: 'Nunito Sans';
-  font-size: 13px;
-  color: #c0714f;
-}
-
-.user-card-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.user-card-section-title {
-  font-family: 'Nunito Sans';
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.user-card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.user-card-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.user-card-label {
-  font-family: 'Nunito Sans';
-  font-size: 11px;
-  color: #9ca3af;
-  white-space: nowrap;
-  flex-shrink: 0;
-  padding-top: 1px;
-}
-
-.user-card-value {
-  font-family: 'Nunito Sans';
-  font-size: 12px;
-  color: #18121e;
-  text-align: right;
-
-  &--quote {
-    font-style: italic;
-    color: #4b5563;
-  }
-}
-
-.user-card-link {
-  font-family: 'Nunito Sans';
-  font-size: 12px;
-  color: #c0714f;
-  text-align: right;
-  text-decoration: none;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.75;
-  }
-}
-
 .users-empty {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 300px;
+  grid-column: 1 / -1;
 }
 
 .users-empty-btn {
